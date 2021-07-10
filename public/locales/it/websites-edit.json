@@ -1,0 +1,14 @@
+{
+  "h1": "Modifica Sito",
+  "description": "Modifica i campi e clicca su aggiorna.",
+  "website-name": "Nome Sito",
+  "website-url": "URL Sito",
+  "share-statistics": "Condividi Statistiche",
+  "share-statistics-description": "Se scegli di condividere le statistiche, un URL pubblico verrà reso disponibile che mostrerà una versione in sola lettura della dashboard di Aurora, non preoccuparti, puoi cambiare questa impostazione in qualsiasi momento.",
+  "make-it-public": "Si, rendile pubbliche.",
+  "keep-it-private": "No, voglio mantenerle private.",
+  "share-link": "Condividi Link",
+  "how-to-connect": "Come connettere il tuo sito",
+  "how-to-connect-description": "Copia questa linea di codice nella sezione HEAD del tuo sito web.",
+  "update-website": "Aggiorna Sito"
+}

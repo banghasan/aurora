@@ -1,0 +1,13 @@
+{
+  "h1": "Il Mio Profilo",
+  "description": "Qui sono presenti le informazioni sul tuo profilo, puoi modificarle e cliccare su aggiorna.",
+  "first-name": "Nome",
+  "last-name": "Cognome",
+  "personal-info": "Informazioni Personali",
+  "personal-info-description": "Queste informazioni non sono mostrate pubblicamente.",
+  "email-address": "Indirizzo Email",
+  "new-password": "Nuova Password",
+  "repeat-new-password": "Ripeti Nuova Password",
+  "update-profile": "Aggiorna Profilo",
+  "account-creation-date": "Questo account è stato creato il"
+}

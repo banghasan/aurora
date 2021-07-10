@@ -1,4 +1,27 @@
 {
   "create-new": "Crea Nuovo",
-  "edit-website": "Modifica"
+  "edit-website": "Modifica",
+  "dashboard-website": "Dashboard",
+  "public-website": "Pubblico",
+  "private-website": "Privato",
+
+  "my-profile": "Profilo",
+  "home": "Home",
+
+  "progress-list-views": "Visite",
+  "progress-list-unique-views": "Uniche",
+  "progress-list-no-data": "Dati Non Disponibili",
+
+  "linear-os": "Sistema Operativo",
+  "linear-browser": "Browser Web",
+  "linear-country": "Paese",
+  "linear-page": "Pagina",
+  "linear-referrer": "Referrer",
+
+  "jumbo-total-views": "Totale Visite",
+  "jumbo-unique-visitors": "Visitatori Uniche",
+  "jumbo-bounces": "Rimbalzi",
+  "jumbo-avg-visit-time": "Tempo di Visita Medio",
+
+  "realtime-current-visitors": "Visitatori Correnti"
 }
