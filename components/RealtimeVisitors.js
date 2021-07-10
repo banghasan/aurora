@@ -1,7 +1,9 @@
+import { useTranslation } from "next-i18next";
 import { useRealtime } from "../hooks/useRealtime";
 
 export const RealtimeVisitors = ({ seed }) => {
   const { visitors, isLoading, isError } = useRealtime({ seed });
+  const { t } = useTranslation("common");
 
   if (isLoading) return <div>Loading..</div>;
   if (isError) return <div>failed to load</div>;
@@ -13,7 +15,7 @@ export const RealtimeVisitors = ({ seed }) => {
         <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
       </span>
       <div className="text-black dark:text-white text-sm">
-        Current Visitors: {visitors.visitors}
+        {t("realtime-current-visitors")}: {visitors.visitors}
       </div>
     </div>
   );

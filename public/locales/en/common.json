@@ -6,5 +6,22 @@
   "private-website": "Private",
 
   "my-profile": "My Profile",
-  "home": "Home"
+  "home": "Home",
+
+  "progress-list-views": "Views",
+  "progress-list-unique-views": "Unique",
+  "progress-list-no-data": "No Data Available",
+
+  "linear-os": "Operative System",
+  "linear-browser": "Web Browser",
+  "linear-country": "Country",
+  "linear-page": "Page",
+  "linear-referrer": "Referrer",
+
+  "jumbo-total-views": "Total Views",
+  "jumbo-unique-visitors": "Unique Visitors",
+  "jumbo-bounces": "Bounces",
+  "jumbo-avg-visit-time": "Avg Visit Time",
+
+  "realtime-current-visitors": "Current Visitors"
 }

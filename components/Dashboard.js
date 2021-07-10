@@ -7,10 +7,12 @@ import { Performance } from "./charts/Performance";
 import { RealtimeVisitors } from "./RealtimeVisitors";
 import { RangeSelector } from "./RangeSelector";
 import { Linear } from "./charts/Linear";
+import { useTranslation } from "next-i18next";
 
 const Area = dynamic(() => import("./charts/Area"), { ssr: false });
 
 export const Dashboard = ({ seed }) => {
+  const { t } = useTranslation("common");
   const { website, isLoading, isError } = useWebsite({ seed });
   const [timeRange, setTimeRange] = useState(TimeRanges.DAY);
 
@@ -37,14 +39,30 @@ export const Dashboard = ({ seed }) => {
       <Area url={`/v2/metrics/${seed}/views/series`} timeRange={timeRange} />
 
       <div className="grid md:grid-cols-3 gap-4 gap-y-10 sm:divide-x divide-gray-200 dark:divide-gray-800">
-        <Linear title="Os" url={`/v2/metrics/${seed}/views/os`} timeRange={timeRange} />
-        <Linear title="Browser" url={`/v2/metrics/${seed}/views/browser`} timeRange={timeRange} />
-        <Linear title="Country" url={`/v2/metrics/${seed}/views/country`} timeRange={timeRange} />
+        <Linear title={t("linear-os")} url={`/v2/metrics/${seed}/views/os`} timeRange={timeRange} />
+        <Linear
+          title={t("linear-browser")}
+          url={`/v2/metrics/${seed}/views/browser`}
+          timeRange={timeRange}
+        />
+        <Linear
+          title={t("linear-country")}
+          url={`/v2/metrics/${seed}/views/country`}
+          timeRange={timeRange}
+        />
       </div>
 
       <div className="grid md:grid-cols-2 gap-4 pt-6 sm:pt-0 gap-y-10 sm:divide-x divide-gray-200 dark:divide-gray-800">
-        <Linear title="Page" url={`/v2/metrics/${seed}/views/page`} timeRange={timeRange} />
-        <Linear title="Referrer" url={`/v2/metrics/${seed}/views/referrer`} timeRange={timeRange} />
+        <Linear
+          title={t("linear-page")}
+          url={`/v2/metrics/${seed}/views/page`}
+          timeRange={timeRange}
+        />
+        <Linear
+          title={t("linear-referrer")}
+          url={`/v2/metrics/${seed}/views/referrer`}
+          timeRange={timeRange}
+        />
       </div>
     </div>
   );

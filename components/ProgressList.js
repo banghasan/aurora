@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { Panel } from "./Panel";
 
 const ProgressListItem = ({ percentage, children }) => (
@@ -9,39 +10,40 @@ const ProgressListItem = ({ percentage, children }) => (
   </div>
 );
 
-export const ProgressList = ({ configuration = {} }) => (
-  <Panel>
-    <div className="space-y-7">
-      <div className="text-black dark:text-white font-medium">
-        <div className="grid grid-cols-4 text-black dark:text-white text-sm">
-          {configuration.header &&
-            configuration.header.columns.map((column, columnKey) => (
-              <div key={columnKey} className={column.className}>
-                {column.label}
+export const ProgressList = ({ title, data }) => {
+  const { t } = useTranslation("common");
+
+  return (
+    <Panel>
+      <div className="space-y-7">
+        <div className="text-black dark:text-white font-medium">
+          <div className="grid grid-cols-4 text-black dark:text-white text-sm">
+            <div className="col-span-2 truncate">{title}</div>
+            <div className="col-span-1 text-right">{t("progress-list-views")}</div>
+            <div className="col-span-1 text-right">{t("progress-list-unique-views")}</div>
+          </div>
+        </div>
+        <div className="space-y-5">
+          {data.length ? (
+            data.map((row, rowKey) => (
+              <div key={rowKey} className="space-y-3">
+                <ProgressListItem percentage={row.percentage}>
+                  <div className="grid grid-cols-4 text-black dark:text-white text-sm">
+                    {configuration.header &&
+                      configuration.header.columns.map((rowColumn, rowColumnKey) => (
+                        <div key={rowColumnKey} className={rowColumn.className}>
+                          {row[rowColumn.accessor]}
+                        </div>
+                      ))}
+                  </div>
+                </ProgressListItem>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="text-sm text-black dark:text-white">{t("progress-list-no-data")}</div>
+          )}
         </div>
       </div>
-      <div className="space-y-5">
-        {configuration.body && configuration.body.values.length ? (
-          configuration.body.values.map((row, rowKey) => (
-            <div key={rowKey} className="space-y-3">
-              <ProgressListItem percentage={row.percentage}>
-                <div className="grid grid-cols-4 text-black dark:text-white text-sm">
-                  {configuration.header &&
-                    configuration.header.columns.map((rowColumn, rowColumnKey) => (
-                      <div key={rowColumnKey} className={rowColumn.className}>
-                        {row[rowColumn.accessor]}
-                      </div>
-                    ))}
-                </div>
-              </ProgressListItem>
-            </div>
-          ))
-        ) : (
-          <div className="text-sm text-black dark:text-white">No Data Available</div>
-        )}
-      </div>
-    </div>
-  </Panel>
-);
+    </Panel>
+  );
+};
