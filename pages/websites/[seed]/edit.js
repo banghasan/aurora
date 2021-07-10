@@ -15,6 +15,7 @@ import { useTranslation } from "next-i18next";
 
 export async function getServerSideProps(context) {
   const { seed } = context.query;
+  const { locale } = context;
 
   return {
     props: {
