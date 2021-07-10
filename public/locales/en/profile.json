@@ -1,0 +1,13 @@
+{
+  "h1": "My Profile",
+  "description": "These are your profile informations, you can edit them and click Update.",
+  "first-name": "First Name",
+  "last-name": "Last Name",
+  "personal-info": "Personal Informations",
+  "personal-info-description": "This information will be not displayed publicly.",
+  "email-address": "Email Address",
+  "new-password": "New Password",
+  "repeat-new-password": "Repeat New Password",
+  "update-profile": "Update Profile",
+  "account-creation-date": "This account was created on"
+}

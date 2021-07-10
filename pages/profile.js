@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Formik, Form } from "formik";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { TextField } from "../components/TextField";
 import { withAuth } from "../hoc/withAuth";
 import { Button } from "../components/Button";
@@ -10,11 +11,19 @@ import { Container } from "../components/Container";
 import { client } from "../utils/api";
 import { Show } from "../components/Show";
 import { Alert } from "../components/Alert";
+import { useTranslation } from "next-i18next";
+
+export const getStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common", "profile"])),
+  },
+});
 
 const Profile = () => {
   const router = useRouter();
   const [errors, setErrors] = useState([]);
   const { user, isLoading, isError } = useUser();
+  const { t } = useTranslation("profile");
 
   const handleSubmit = async (values, { setSubmitting }) => {
     setErrors([]);
@@ -45,11 +54,11 @@ const Profile = () => {
     <Container>
       <div className="flex flex-col justify-center items-start max-w-3xl w-full mx-auto mb-16">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-          My Profile
+          {t("h1")}
         </h1>
 
         <p className="prose leading-relaxed text-gray-600 dark:text-gray-400 mb-4">
-          These are your websites, you can manage them by clicking on the proper buttons.
+          {t("description")}
         </p>
 
         <div className="border border-gray-200 dark:border-gray-800 rounded-lg p-4 sm:p-8 mt-8 w-full">
@@ -66,14 +75,14 @@ const Profile = () => {
                   <div className="space-y-8">
                     <div className="space-y-6">
                       <TextField
-                        label="First Name"
+                        label={t("first-name")}
                         name="firstname"
                         type="text"
                         autocomplete="none"
                       />
 
                       <TextField
-                        label="Last Name"
+                        label={t("last-name")}
                         name="lastname"
                         type="text"
                         autocomplete="none"
@@ -82,16 +91,16 @@ const Profile = () => {
 
                     <div>
                       <h3 className="font-bold text-2xl md:text-2xl tracking-tight mt-14 mb-1 text-black dark:text-white">
-                        Personal Information
+                        {t("personal-info")}
                       </h3>
                       <p className="prose leading-relaxed text-gray-600 dark:text-gray-400 mb-2">
-                        This information will be not displayed publicly.
+                        {t("personal-info-description")}
                       </p>
                     </div>
 
                     <div className="space-y-6">
                       <TextField
-                        label="Email Address"
+                        label={t("email-address")}
                         name="email"
                         type="email"
                         autocomplete="none"
@@ -99,14 +108,14 @@ const Profile = () => {
 
                       <div className="grid sm:grid-cols-2 gap-x-4 gap-y-6">
                         <TextField
-                          label="New Password"
+                          label={t("new-password")}
                           name="password"
                           type="password"
                           autocomplete="none"
                         />
 
                         <TextField
-                          label="Repeat New Password"
+                          label={t("repeat-new-password")}
                           name="password_confirmation"
                           type="password"
                           autocomplete="none"
@@ -117,7 +126,7 @@ const Profile = () => {
 
                   <div className="pt-5">
                     <div className="flex justify-end">
-                      <Button type="submit" value="Update Profile" isLoading={isSubmitting} />
+                      <Button type="submit" value={t("update-profile")} isLoading={isSubmitting} />
                     </div>
                   </div>
                 </div>
@@ -128,7 +137,7 @@ const Profile = () => {
 
         <div className="flex justify-center mt-8 w-full">
           <p className="prose leading-relaxed text-gray-600 dark:text-gray-400 mb-2">
-            This account was created on {localize(user.created_at)}.
+            {t("account-creation-date")} {localize(user.created_at)}.
           </p>
         </div>
       </div>
