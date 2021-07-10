@@ -6,7 +6,7 @@ import { TranslateIcon } from "@heroicons/react/solid";
 const MenuItem = ({ locale }) => {
   return (
     <Menu.Item>
-      <NextLink href="/" locale={locale}>
+      <NextLink href="" locale={locale}>
         <a className="block px-0 py-2 text-xs font-bold text-center rounded-md text-black dark:text-gray-200 dark:hover:text-white">
           {locale.toUpperCase()}
         </a>
