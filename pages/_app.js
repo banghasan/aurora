@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 
 import { ThemeProvider } from "next-themes";
+import { appWithTranslation } from "next-i18next";
 
 const App = ({ Component, pageProps }) => {
   return (
@@ -10,4 +11,4 @@ const App = ({ Component, pageProps }) => {
   );
 };
 
-export default App;
+export default appWithTranslation(App);
