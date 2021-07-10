@@ -1,5 +1,6 @@
 import NextLink from "next/link";
 import { Fragment } from "react";
+import { useRouter } from "next/router";
 import { Menu, Transition } from "@headlessui/react";
 import { TranslateIcon } from "@heroicons/react/solid";
 
@@ -15,7 +16,9 @@ const MenuItem = ({ locale }) => {
   );
 };
 
-export function LocaleDialog() {
+export const LocaleDialog = () => {
+  const router = useRouter();
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       {({ open }) => (
@@ -35,8 +38,9 @@ export function LocaleDialog() {
               className="origin-top-left absolute left-0 mt-3 w-56 rounded shadow focus:outline-none"
             >
               <div className="p-1 grid grid-cols-2 text-black dark:text-white bg-gray-200 dark:bg-gray-800 rounded">
-                <MenuItem locale="en" />
-                <MenuItem locale="it" />
+                {router.locales.map((locale, index) => (
+                  <MenuItem key={index} locale={locale} />
+                ))}
               </div>
             </Menu.Items>
           </Transition>
@@ -44,4 +48,4 @@ export function LocaleDialog() {
       )}
     </Menu>
   );
-}
+};
