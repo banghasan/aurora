@@ -1,0 +1,14 @@
+{
+  "h1": "Edit Website",
+  "description": "Edit the fields, and click on update.",
+  "website-name": "Website Name",
+  "website-url": "Website URL",
+  "share-statistics": "Share Statistics",
+  "share-statistics-description": "If you choose to make statistics public, a public URL will be available presenting a read-only version of the Aurora Dashboard. Don't worry, you can always disable it later!",
+  "make-it-public": "Yes, make it public.",
+  "keep-it-private": "Nope, I want to keep it private.",
+  "share-link": "Share Link",
+  "how-to-connect": "How to Connect Your Website",
+  "how-to-connect-description": "Copy this line of code in the HEAD of your page.",
+  "update-website": "Update Website"
+}

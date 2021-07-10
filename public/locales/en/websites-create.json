@@ -1,0 +1,11 @@
+{
+  "h1": "Create Website",
+  "description": "Compile the required fields, and click on create.",
+  "website-name": "Website Name",
+  "website-url": "Website URL",
+  "share-statistics": "Share Statistics",
+  "share-statistics-description": "If you choose to make statistics public, a public URL will be available presenting a read-only version of the Aurora Dashboard. Don't worry, you can always disable it later!",
+  "make-it-public": "Yes, make it public.",
+  "keep-it-private": "Nope, I want to keep it private.",
+  "create": "Create"
+}

@@ -1,11 +1,13 @@
 import NextLink from "next/link";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
+import { useTranslation } from "next-i18next";
 import { LocaleDialog } from "./LocaleDialog";
 
 export const Navbar = () => {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
+  const { t } = useTranslation("common");
 
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
@@ -55,10 +57,10 @@ export const Navbar = () => {
         </NextLink>
         <div className="flex mt-3 lg:mt-4 tracking-wide text-base sm:text-base space-x-1.5 sm:space-x-6">
           <NextLink href="/profile">
-            <a className="text-gray-900 dark:text-gray-100">My Profile</a>
+            <a className="text-gray-900 dark:text-gray-100">{t("my-profile")}</a>
           </NextLink>
           <NextLink href="/">
-            <a className="text-gray-900 dark:text-gray-100">Home</a>
+            <a className="text-gray-900 dark:text-gray-100">{t("home")}</a>
           </NextLink>
         </div>
       </div>

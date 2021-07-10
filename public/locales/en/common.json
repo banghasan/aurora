@@ -3,5 +3,8 @@
   "edit-website": "Edit",
   "dashboard-website": "Dashboard",
   "public-website": "Public",
-  "private-website": "Private"
+  "private-website": "Private",
+
+  "my-profile": "My Profile",
+  "home": "Home"
 }
