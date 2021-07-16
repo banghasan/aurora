@@ -7,7 +7,7 @@ import { Performance } from "./charts/Performance";
 import { RealtimeVisitors } from "./RealtimeVisitors";
 import { RangeSelector } from "./RangeSelector";
 import { Linear } from "./charts/Linear";
-import { useTranslation } from "next-i18next";
+import useTranslation from "next-translate/useTranslation";
 
 const Area = dynamic(() => import("./charts/Area"), { ssr: false });
 

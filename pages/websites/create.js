@@ -1,7 +1,6 @@
 import { Formik, Form } from "formik";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { TextField } from "../../components/TextField";
 import { Radio } from "../../components/Radio";
 import { withAuth } from "../../hoc/withAuth";
@@ -10,13 +9,7 @@ import { client } from "../../utils/api";
 import { Container } from "../../components/Container";
 import { Show } from "../../components/Show";
 import { Alert } from "../../components/Alert";
-import { useTranslation } from "next-i18next";
-
-export const getStaticProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ["common", "websites-create"])),
-  },
-});
+import useTranslation from "next-translate/useTranslation";
 
 const Create = () => {
   const router = useRouter();

@@ -1,17 +1,14 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import useTranslation from "next-translate/useTranslation";
 import { withAuth } from "../../../hoc/withAuth";
 import { Container } from "../../../components/Container";
 import { Dashboard } from "../../../components/Dashboard";
 
 export async function getServerSideProps(context) {
   const { seed } = context.query;
-  const { locale } = context;
 
   return {
     props: {
       seed,
-      ...(await serverSideTranslations(locale, ["common", "websites-show"])),
     },
   };
 }

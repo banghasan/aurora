@@ -1,16 +1,9 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import useTranslation from "next-translate/useTranslation";
 
 import { Container } from "../components/Container";
 import { Websites } from "../components/Websites";
 import { DividerButton } from "../components/DividerButton";
 import { withAuth } from "../hoc/withAuth";
-
-export const getStaticProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ["common", "index"])),
-  },
-});
 
 const Home = () => {
   const { t } = useTranslation("index");

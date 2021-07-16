@@ -1,6 +1,6 @@
 import { default as NextLink } from "next/link";
 import { PlusSmIcon } from "@heroicons/react/solid";
-import { useTranslation } from "next-i18next";
+import useTranslation from "next-translate/useTranslation";
 
 export const DividerButton = ({ link }) => {
   const { t } = useTranslation("common");

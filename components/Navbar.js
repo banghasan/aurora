@@ -1,7 +1,7 @@
 import NextLink from "next/link";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { useTranslation } from "next-i18next";
+import useTranslation from "next-translate/useTranslation";
 import { LocaleDialog } from "./LocaleDialog";
 
 export const Navbar = () => {

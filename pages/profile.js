@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Formik, Form } from "formik";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { TextField } from "../components/TextField";
 import { withAuth } from "../hoc/withAuth";
 import { Button } from "../components/Button";
@@ -11,13 +10,7 @@ import { Container } from "../components/Container";
 import { client } from "../utils/api";
 import { Show } from "../components/Show";
 import { Alert } from "../components/Alert";
-import { useTranslation } from "next-i18next";
-
-export const getStaticProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ["common", "profile"])),
-  },
-});
+import useTranslation from "next-translate/useTranslation";
 
 const Profile = () => {
   const router = useRouter();

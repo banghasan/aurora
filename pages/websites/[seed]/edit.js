@@ -1,6 +1,5 @@
 import { Formik, Form } from "formik";
 import { useState } from "react";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { TextField } from "../../../components/TextField";
 import { Radio } from "../../../components/Radio";
 import { Button } from "../../../components/Button";
@@ -11,16 +10,14 @@ import { SharedLink } from "../../../components/ShareLink";
 import { Container } from "../../../components/Container";
 import { client } from "../../../utils/api";
 import { Alert } from "../../../components/Alert";
-import { useTranslation } from "next-i18next";
+import useTranslation from "next-translate/useTranslation";
 
 export async function getServerSideProps(context) {
   const { seed } = context.query;
-  const { locale } = context;
 
   return {
     props: {
       seed,
-      ...(await serverSideTranslations(locale, ["common", "websites-edit"])),
     },
   };
 }

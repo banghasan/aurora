@@ -1,4 +1,4 @@
-import { useTranslation } from "next-i18next";
+import useTranslation from "next-translate/useTranslation";
 import { useRealtime } from "../hooks/useRealtime";
 
 export const RealtimeVisitors = ({ seed }) => {

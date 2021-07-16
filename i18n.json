@@ -1,0 +1,12 @@
+{
+  "locales": ["en", "it"],
+  "defaultLocale": "en",
+  "pages": {
+    "*": ["common"],
+    "/": ["index"],
+    "/profile": ["profile"],
+    "/websites/create": ["websites-create"],
+    "/websites/[seed]": ["websites-show"],
+    "/wensites/[seed]/edit": ["websites-edit"]
+  }
+}

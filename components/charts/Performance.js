@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { range } from "lodash";
 import { Jumbo } from "./Jumbo";
 import { useGraph } from "../../hooks/useGraph";
-import { useTranslation } from "next-i18next";
+import useTranslation from "next-translate/useTranslation";
 
 const Loader = dynamic(() => import("../Loader").then((mod) => mod.Loader), { ssr: false });
 

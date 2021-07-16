@@ -1,5 +1,5 @@
 import { default as NextLink } from "next/link";
-import { useTranslation } from "next-i18next";
+import useTranslation from "next-translate/useTranslation";
 import { useMeWebsites } from "../hooks/useMeWebsites";
 
 const WebsiteCard = ({ item: website }) => {
