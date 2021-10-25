@@ -1,20 +1,13 @@
-import { Meta } from "./Meta";
-import { Navbar } from "./Navbar";
+import { Navbar } from "./Navbar/Navbar";
 
-export const Container = ({ children, navbar = true }) => {
+export function Container(props) {
   return (
-    <div className="bg-white dark:bg-black">
-      <Meta />
+    <div className="bg-white">
+      <Navbar />
 
-      {navbar && (
-        <div className="mb-4 sm:mb-16">
-          <Navbar />
-        </div>
-      )}
-
-      <main className="flex flex-col justify-center px-4 sm:px-8 bg-white dark:bg-black">
-        {children}
-      </main>
+      <div className="max-w-7xl mx-auto">
+        <main className="px-6 md:px-0">{props.children}</main>
+      </div>
     </div>
   );
-};
+}
