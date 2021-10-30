@@ -1,72 +1,68 @@
-import toast from "react-hot-toast";
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { Button } from "../../components/Button";
-import { Radio } from "../../components/Radio";
-import { Input } from "../../components/Input";
 import { Container } from "../../components/Container";
-import { Page } from "../../components/Page";
-import { client } from "../../utils/api";
+import { Heading } from "../../components/Heading/Heading";
+import { Title } from "../../components/Heading/Title";
+import { Button } from "../../components/UI/Button";
+import { Input } from "../../components/UI/Input";
+import { Prose } from "../../components/UI/Prose";
+import { Select } from "../../components/UI/Select";
+import { Textarea } from "../../components/UI/Textarea";
 
-const Create = () => {
-  const router = useRouter();
-  const { register, handleSubmit, formState } = useForm();
+export function SubTitle(props) {
+  return (
+    <h3 className="font-bold tracking-tighter text-2xl md:text-4xl text-gray-900">
+      {props.children}
+    </h3>
+  );
+}
 
-  const onSubmit = async (data) => {
-    try {
-      const res = await client.post("/v2/me/websites", {
-        ...data,
-        shared: Boolean(Number(data.shared)),
-      });
-
-      toast.success("Website created!");
-      router.push(`/websites/${res.data.seed}/edit`);
-    } catch (err) {
-      toast.error("Something goes wrong..");
-    }
-  };
+export default function Create(props) {
+  const options = [
+    { label: "Nope, I Want to Keep it Private!", value: "0" },
+    { label: "Yes, Make it Public!", value: "1" },
+  ];
 
   return (
     <Container>
-      <Page title="Create Website">
-        <div className="border border-gray-200 dark:border-gray-800 rounded-lg p-4 sm:p-8">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <Input name="name" label="Name" register={register} />
-                <Input name="url" label="URL" register={register} />
-              </div>
+      <Heading title="Create Website">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi risus
+        dui, sagittis nec dapibus in, interdum eget leo. Duis finibus turpis nec
+        nibh mattis, in aliquam dui condimentum.
+      </Heading>
 
-              <div>
-                <h3 className="font-bold text-2xl md:text-2xl tracking-tight mt-14 mb-1 text-black dark:text-white">
-                  Share Statistics
-                </h3>
-                <p className="prose leading-relaxed text-gray-600 dark:text-gray-400 mb-2">
-                  If you choose to make statistics public, a public URL will be available presenting
-                  a read-only version of the Aurora Dashboard. Don't worry, you can always disable
-                  it later!
-                </p>
-              </div>
+      <div className="grid grid-cols-1 gap-6">
+        <Input label="Name" name="name" />
+        <Input label="URL" name="url" />
+        <Textarea label="Description" name="description" />
 
-              <div className="space-y-4">
-                <Radio name="shared" label="Yes, make it public." value="1" register={register} />
-                <Radio
-                  name="shared"
-                  label="Nope, I want to keep it private."
-                  value="0"
-                  register={register}
-                />
-              </div>
-
-              <div className="flex justify-end pt-4 border-t border-gray-200 dark:border-gray-800">
-                <Button type="submit" value="Create" isLoading={formState.isSubmitting} />
-              </div>
-            </div>
-          </form>
+        <div className="space-y-3 pt-10">
+          <SubTitle>Share Statistics</SubTitle>
+          <Prose>
+            If you choose to make statistics public, a public URL will be
+            available presenting a read-only version of the Aurora Dashboard.
+            Don't worry, you can always disable it later!
+          </Prose>
         </div>
-      </Page>
+
+        <Select label="Visibility" name="visibility" options={options} />
+
+        <div className="space-y-3 pt-10">
+          <SubTitle>Link to Share</SubTitle>
+          <Prose>Inserire Qui</Prose>
+        </div>
+
+        <div className="space-y-3 pt-10">
+          <SubTitle>How to Connect Your Website</SubTitle>
+          <Prose>Copy this line of code in the HEAD of your page.</Prose>
+        </div>
+
+        <pre class="p-4 bg-gray-200 text-black dark:text-white">
+          TODO: Inserire SCRIPT
+        </pre>
+
+        <div className="pt-10">
+          <Button label="Create Website!" />
+        </div>
+      </div>
     </Container>
   );
-};
-
-export default Create;
+}
