@@ -13,6 +13,7 @@ export function Navbar() {
           <MenuItem href="/" label="Websites" />
           <MenuItem href="/users" label="Users" />
           <MenuItem href="/profile" label="Profile" />
+          <MenuItem href="/dashboard" label="Dashboard" />
         </nav>
       </div>
     </div>
