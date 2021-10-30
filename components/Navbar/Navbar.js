@@ -10,8 +10,9 @@ export function Navbar() {
 
       <div className="flex items-center justify-end md:flex-1 lg:w-0">
         <nav className="flex md:space-x-4">
-          <MenuItem href="/" label="Home" />
-          <MenuItem href="/dashboard" label="Dashboard" />
+          <MenuItem href="/" label="Websites" />
+          <MenuItem href="/users" label="Users" />
+          <MenuItem href="/profile" label="Profile" />
         </nav>
       </div>
     </div>
