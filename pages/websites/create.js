@@ -55,7 +55,7 @@ export default function Create(props) {
           <Prose>Copy this line of code in the HEAD of your page.</Prose>
         </div>
 
-        <pre class="p-4 bg-gray-200 text-black dark:text-white">
+        <pre className="p-4 bg-gray-200 text-black dark:text-white">
           TODO: Inserire SCRIPT
         </pre>
 
