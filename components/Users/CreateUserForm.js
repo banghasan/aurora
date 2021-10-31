@@ -1,3 +1,4 @@
+import { useForm } from "react-hook-form";
 import { Input } from "../UI/Input";
 import { Button } from "../UI/Button";
 import { Select } from "../UI/Select";
@@ -5,12 +6,15 @@ import { SubTitle } from "../UI/SubTitle";
 import { Prose } from "../UI/Prose";
 
 export function CreateUserForm(props) {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   return (
-    <div className="grid grid-cols-1 gap-6">
-      <Input label="First Name" name="firstname" />
-      <Input label="Last Name" name="lastname" />
-      <Input label="Email Address" name="email" />
-      <Select label="Role" name="role" options={[]} />
+    <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit(onSubmit)}>
+      <Input label="First Name" {...register("firstname")} />
+      <Input label="Last Name" {...register("lastname")} />
+      <Input label="Email Address" {...register("email")} />
+      <Select label="Role" {...register("role")} options={[]} />
 
       <div className="space-y-3 pt-10">
         <SubTitle>Set Password</SubTitle>
@@ -21,17 +25,17 @@ export function CreateUserForm(props) {
       </div>
 
       <div className="flex space-x-4">
-        <Input label="Password" name="password" type="password" />
+        <Input label="Password" type="password" {...register("password")} />
         <Input
           label="Confirm Password"
-          name="password_confirmation"
           type="password"
+          {...register("password_confirmation")}
         />
       </div>
 
       <div className="pt-10">
-        <Button label="Create User!" />
+        <Button type="submit" label="Create User!" />
       </div>
-    </div>
+    </form>
   );
 }

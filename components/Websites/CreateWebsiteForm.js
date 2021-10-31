@@ -1,3 +1,4 @@
+import { useForm } from "react-hook-form";
 import { Input } from "../UI/Input";
 import { Button } from "../UI/Button";
 import { Select } from "../UI/Select";
@@ -6,16 +7,19 @@ import { Prose } from "../UI/Prose";
 import { Textarea } from "../UI/Textarea";
 
 export function CreateWebsiteForm() {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   const options = [
     { label: "Nope, I Want to Keep it Private!", value: "0" },
     { label: "Yes, Make it Public!", value: "1" },
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-6">
-      <Input label="Name" name="name" />
-      <Input label="URL" name="url" />
-      <Textarea label="Description" name="description" />
+    <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit(onSubmit)}>
+      <Input label="Name" {...register("name")} />
+      <Input label="URL" name="url" {...register("url")} />
+      <Textarea label="Description" {...register("description")} />
 
       <div className="space-y-3 pt-10">
         <SubTitle>Share Statistics</SubTitle>
@@ -26,7 +30,7 @@ export function CreateWebsiteForm() {
         </Prose>
       </div>
 
-      <Select label="Visibility" name="visibility" options={options} />
+      <Select label="Visibility" {...register("is_public")} options={options} />
 
       <div className="space-y-3 pt-10">
         <SubTitle>Link to Share</SubTitle>
@@ -43,8 +47,8 @@ export function CreateWebsiteForm() {
       </pre>
 
       <div className="pt-10">
-        <Button label="Create Website!" />
+        <Button type="submit" label="Create Website!" />
       </div>
-    </div>
+    </form>
   );
 }
