@@ -1,3 +1,4 @@
+import { BarChart } from "../components/UI/BarChart";
 import { Container } from "../components/Container";
 import { Heading } from "../components/Heading/Heading";
 import { Card } from "../components/UI/Card";
@@ -25,7 +26,9 @@ export default function Dashboard(props) {
         <Card className="p-6">Visit Time</Card>
       </Card>
 
-      <Card className="h-48">Grafico</Card>
+      <Card className="p-6">
+        <BarChart />
+      </Card>
 
       <Card className="p-6 flex">
         <Card className="p-6">Pages</Card>

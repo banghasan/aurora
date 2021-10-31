@@ -2,7 +2,7 @@ export function Input(props) {
   const id = props.id ? props.id : props.name;
 
   return (
-    <div>
+    <div className="w-full">
       <label for={id} className="block font-medium text-gray-700">
         {props.label}
       </label>

@@ -1,16 +1,26 @@
 import { Container } from "../../components/Container";
+import { UserList } from "../../components/Users/UserList";
 import { Heading } from "../../components/Heading/Heading";
-import { CreateWebsiteForm } from "../../components/Websites/CreateWebsiteForm";
 
-export default function Create(props) {
+const users = [
+  {
+    id: 1,
+    name: "John Doe",
+    email: "ciccio@example.com",
+    role: "admin",
+  },
+];
+
+export default function Users(props) {
   return (
     <Container>
-      <Heading title="Create Website">
+      <Heading title="Users List">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi risus
         dui, sagittis nec dapibus in, interdum eget leo. Duis finibus turpis nec
         nibh mattis, in aliquam dui condimentum.
       </Heading>
-      <CreateWebsiteForm />
+
+      <UserList users={users} />
     </Container>
   );
 }
