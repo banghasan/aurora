@@ -1,8 +1,12 @@
 import { Container } from "../../components/Container";
 import { Heading } from "../../components/Heading/Heading";
-import { CreateUserForm } from "../../components/Users/CreateUserForm";
+import { UserForm } from "../../components/Users/UserForm";
 
 export default function Create(props) {
+  const handleSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <Container>
       <Heading title="Create User">
@@ -11,7 +15,7 @@ export default function Create(props) {
         nibh mattis, in aliquam dui condimentum.
       </Heading>
 
-      <CreateUserForm />
+      <UserForm onSubmit={handleSubmit} />
     </Container>
   );
 }

@@ -2,6 +2,8 @@ import { Container } from "../components/Container";
 import { Heading } from "../components/Heading/Heading";
 
 export default function Profile(props) {
+  /* TODO: Valutare se rimuovere questa pagina, lascio tutto nel menu utenti. */
+
   return (
     <Container>
       <Heading title="Your Profile">

@@ -5,12 +5,16 @@ import { Select } from "../UI/Select";
 import { SubTitle } from "../UI/SubTitle";
 import { Prose } from "../UI/Prose";
 
-export function CreateUserForm(props) {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+export function UserForm(props) {
+  const { register, handleSubmit, formState } = useForm({
+    defaultValues: props.defaultValues,
+  });
 
   return (
-    <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="grid grid-cols-1 gap-6"
+      onSubmit={handleSubmit(props.onSubmit)}
+    >
       <Input label="First Name" {...register("firstname")} />
       <Input label="Last Name" {...register("lastname")} />
       <Input label="Email Address" {...register("email")} />
@@ -34,7 +38,12 @@ export function CreateUserForm(props) {
       </div>
 
       <div className="pt-10">
-        <Button type="submit" label="Create User!" />
+        <Button
+          disabled={formState.isSubmitting}
+          isLoading={formState.isSubmitting}
+          type="submit"
+          label={props.isNew ? "Create User!" : "Update User!"}
+        />
       </div>
     </form>
   );
