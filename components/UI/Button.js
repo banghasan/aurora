@@ -5,7 +5,7 @@ export function Button(props) {
 
   const classicVariant = classes(
     baseClassNames,
-    "text-white bg-gray-900 hover:bg-gray-700"
+    "text-white bg-gray-900 hover:bg-gray-700 disabled:bg-gray-700"
   );
 
   const invertedVariant = classes(
@@ -18,11 +18,11 @@ export function Button(props) {
 
   const classNames = classes(variant, props.className);
 
-  const { type, label, ...rest } = props;
+  const { type, label, isLoading, ...rest } = props;
 
   return (
     <button {...rest} type={type} className={classNames}>
-      {label}
+      {isLoading ? "Submitting.." : label}
     </button>
   );
 }
@@ -30,4 +30,5 @@ export function Button(props) {
 Button.defaultProps = {
   type: "button",
   variant: "classic",
+  isLoading: false,
 };

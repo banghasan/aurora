@@ -7,8 +7,18 @@ import { Prose } from "../UI/Prose";
 import { Textarea } from "../UI/Textarea";
 
 export function CreateWebsiteForm() {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { register, handleSubmit, formState } = useForm();
+
+  // TODO: Remove this
+  const onSubmit = async (data) => {
+    console.log("Parto");
+    await simulateServerResponse();
+    console.log(data);
+  };
+
+  const simulateServerResponse = () => {
+    return new Promise((resolve) => setTimeout(resolve, 5000));
+  };
 
   const options = [
     { label: "Nope, I Want to Keep it Private!", value: "0" },
@@ -47,7 +57,12 @@ export function CreateWebsiteForm() {
       </pre>
 
       <div className="pt-10">
-        <Button type="submit" label="Create Website!" />
+        <Button
+          disabled={formState.isSubmitting}
+          isLoading={formState.isSubmitting}
+          type="submit"
+          label="Create Website!"
+        />
       </div>
     </form>
   );
