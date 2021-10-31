@@ -66,7 +66,7 @@ export function WebsiteForm(props) {
           disabled={formState.isSubmitting}
           isLoading={formState.isSubmitting}
           type="submit"
-          label={props.actionText}
+          label={props.isNew ? "Create Website!" : "Update Website!"}
         />
       </div>
     </form>

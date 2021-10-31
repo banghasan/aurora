@@ -21,7 +21,7 @@ export default function Create(props) {
         fields are marked with an asterisk (*).
       </Heading>
 
-      <WebsiteForm actionText="Create Website!" onSubmit={handleSubmit} />
+      <WebsiteForm onSubmit={handleSubmit} />
     </Container>
   );
 }

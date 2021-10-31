@@ -33,7 +33,6 @@ export default function Edit(props) {
       <WebsiteForm
         isNew={false}
         defaultValues={website}
-        actionText="Update Website!"
         onSubmit={handleSubmit}
       />
     </Container>
