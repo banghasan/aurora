@@ -3,7 +3,7 @@ export function Textarea(props) {
 
   return (
     <div>
-      <label for={id} className="block font-medium text-gray-700">
+      <label htmlFor={id} className="block font-medium text-gray-700">
         {props.label}
       </label>
 
