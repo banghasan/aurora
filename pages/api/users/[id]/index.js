@@ -1,6 +1,6 @@
 import Joi from "joi";
-import db from "../../../lib/db";
-import { formatUser } from "../../../utils/responses";
+import db from "../../../../lib/db";
+import { formatUser } from "../../../../utils/responses";
 
 const schema = Joi.object({
   firstname: Joi.string().required(),
