@@ -1,4 +1,4 @@
-const { dropProtocol } = require("../urls");
+import { dropProtocol } from "../../utils/urls";
 
 describe("Testing Url dropProtocoling works", () => {
   it("testing with correct protocols", () => {
