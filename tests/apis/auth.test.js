@@ -1,6 +1,7 @@
 import { createMocks } from "node-mocks-http";
 import users from "../../mocks/users.json";
 import prisma from "../../lib/dbInstance";
+import { AuthTest } from "../../utils/tests";
 import { default as loginHandler } from "../../pages/api/auth/login";
 import { default as logoutHandler } from "../../pages/api/auth/logout";
 
@@ -78,8 +79,11 @@ describe("POST /auth/login", () => {
 
 describe("POST /auth/logout", () => {
   it("should logout the user", async () => {
+    const cookie = await new AuthTest().getCookie();
+
     const { req, res } = createMocks({
       method: "POST",
+      cookies: cookie,
     });
 
     await logoutHandler(req, res);
@@ -88,6 +92,20 @@ describe("POST /auth/logout", () => {
     expect(res._getHeaders()["set-cookie"]).toBeDefined();
     expect(res._getJSONData()).toEqual({
       message: "Logged out successfully",
+    });
+  });
+
+  it("should fail if the user is not logged in", async () => {
+    const { req, res } = createMocks({
+      method: "POST",
+    });
+
+    await logoutHandler(req, res);
+
+    expect(res._getStatusCode()).toBe(401);
+    expect(res._getHeaders()["set-cookie"]).toBeUndefined();
+    expect(res._getJSONData()).toEqual({
+      message: "Unauthorized",
     });
   });
 });

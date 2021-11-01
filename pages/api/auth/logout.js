@@ -1,7 +1,8 @@
 import { serialize } from "cookie";
+import { withAuth } from "../../../lib/middleware/withAuth";
 import { AUTH_COOKIE } from "../../../utils/constants";
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
   if (req.method === "POST") {
     const cookie = serialize(AUTH_COOKIE, null, {
       path: "/",
@@ -18,4 +19,6 @@ export default async function handler(req, res) {
   }
 
   return res.status(422).json({ message: "Method not allowed" });
-}
+};
+
+export default withAuth(handler);
