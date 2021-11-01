@@ -157,13 +157,6 @@ describe("updateUser", () => {
     expect(updatedUser).toMatchObject(data);
     expect(verify("freschissimo", updatedUser.password)).toBe(true);
   });
-
-  it("should keep the same email", async () => {
-    const updatedUser = await db.updateUser(user.id, {
-      email: "doesnot@example.com",
-    });
-    expect(updatedUser.email).toBe(data.email);
-  });
 });
 
 describe("createWebsite", () => {

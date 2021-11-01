@@ -15,7 +15,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand --verbose"
   },
   "dependencies": {
     "@prisma/client": "^3.3.0",

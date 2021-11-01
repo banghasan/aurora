@@ -1,16 +1,6 @@
 import Joi from "joi";
 import db from "../../../lib/db";
-
-const formatUser = (user) => {
-  return {
-    id: user.id,
-    firstname: user.firstname,
-    lastname: user.lastname,
-    email: user.email,
-    created_at: user.created_at,
-    updated_at: user.updated_at,
-  };
-};
+import { formatUser } from "../../../utils/responses";
 
 const schema = Joi.object({
   firstname: Joi.string().required(),
