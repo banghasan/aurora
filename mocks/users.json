@@ -1,0 +1,32 @@
+[
+  {
+    "firstname": "First",
+    "lastname": "User",
+    "email": "firstuser@example.com",
+    "password": "$2a$10$LLhSKISunfuoRHuXhQ2FUuMktoRcYTSmjPdaA.Ezk5DSyJjTdfZv2"
+  },
+  {
+    "firstname": "Fidole",
+    "lastname": "Klaes",
+    "email": "fklaes1@is.gd",
+    "password": "$2a$10$LLhSKISunfuoRHuXhQ2FUuMktoRcYTSmjPdaA.Ezk5DSyJjTdfZv2"
+  },
+  {
+    "firstname": "Sammy",
+    "lastname": "Stollberger",
+    "email": "sstollberger2@istockphoto.com",
+    "password": "$2a$10$LLhSKISunfuoRHuXhQ2FUuMktoRcYTSmjPdaA.Ezk5DSyJjTdfZv2"
+  },
+  {
+    "firstname": "Danica",
+    "lastname": "Course",
+    "email": "dcourse3@baidu.com",
+    "password": "$2a$10$LLhSKISunfuoRHuXhQ2FUuMktoRcYTSmjPdaA.Ezk5DSyJjTdfZv2"
+  },
+  {
+    "firstname": "Seamus",
+    "lastname": "Auld",
+    "email": "sauld4@reference.com",
+    "password": "$2a$10$LLhSKISunfuoRHuXhQ2FUuMktoRcYTSmjPdaA.Ezk5DSyJjTdfZv2"
+  }
+]

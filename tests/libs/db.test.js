@@ -11,6 +11,35 @@ afterEach(async () => {
   await prisma.event.deleteMany();
 });
 
+describe.skip("getAllUser", () => {
+  const data = {
+    firstname: "Renato",
+    lastname: "Pozzi",
+    email: "info@renatopozzi.me",
+  };
+
+  beforeEach(async () => {
+    await db.createUser(data, "password");
+  });
+
+  it("should obtain correctly the users", async () => {
+    const users = await db.getAllUsers();
+    expect(Array.isArray(users)).toBe(true);
+    expect(users.length).toBe(1);
+
+    users.forEach((user) => {
+      expect(user).toEqual({
+        id: expect.any(Number),
+        firstname: expect.any(String),
+        lastname: expect.any(String),
+        email: expect.any(String),
+        created_at: expect.any(String),
+        updated_at: expect.any(String),
+      });
+    });
+  });
+});
+
 describe("createUser", () => {
   const data = {
     firstname: "Renato",
