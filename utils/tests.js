@@ -18,13 +18,14 @@ export class AuthTest {
 
     await handler(req, res);
 
-    const cookie = serialize(AUTH_COOKIE, res._getJSONData().accessToken, {
+    const { accessToken, user } = res._getJSONData();
+    const cookie = serialize(AUTH_COOKIE, accessToken, {
       path: "/",
       httpOnly: true,
       sameSite: true,
       maxAge: 60,
     });
 
-    return { ...res._getJSONData(), cookie };
+    return { ...user, cookie };
   }
 }

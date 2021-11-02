@@ -1,5 +1,5 @@
 import Joi from "joi";
-import db from "../../../../lib/db";
+import db from "../../../lib/db";
 
 const schema = Joi.object({
   name: Joi.string().required(),
