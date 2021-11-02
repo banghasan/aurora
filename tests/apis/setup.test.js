@@ -22,7 +22,6 @@ describe("POST /setup", () => {
 
     await handler(req, res);
 
-    console.log(res._getJSONData());
     expect(res._getStatusCode()).toBe(201);
     expect(res._getJSONData()).toMatchObject({
       email: "john.doe@example.com",
