@@ -40,6 +40,32 @@ describe("getAllUsers", () => {
   });
 });
 
+describe("getAllWebsites", () => {
+  beforeEach(async () => {
+    await db.createWebsite({
+      name: "ThisIsWebsite",
+      url: "https://thisiswebsite.com",
+      user_id: 1,
+      is_public: true,
+    });
+  });
+
+  it("should return the website list", async () => {
+    const websites = await db.getAllWebsites();
+    expect(Array.isArray(websites)).toBe(true);
+    expect(websites.length).toBe(1);
+
+    websites.forEach((website) => {
+      expect(website).toMatchObject({
+        id: expect.any(String),
+        name: expect.any(String),
+        url: expect.any(String),
+        is_public: expect.any(Boolean),
+      });
+    });
+  });
+});
+
 describe("createUser", () => {
   const data = {
     firstname: "Renato",
