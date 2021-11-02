@@ -1,5 +1,6 @@
 import Joi from "joi";
 import db from "../../../lib/db";
+import { withAuth } from "../../../lib/middleware/withAuth";
 import { formatUser } from "../../../utils/responses";
 
 const schema = Joi.object({
@@ -19,7 +20,7 @@ const schema = Joi.object({
   confirmPassword: Joi.string().valid(Joi.ref("password")).required(),
 });
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
   if (req.method === "GET") {
     const data = await db.getAllUsers();
     const users = data.map((user) => formatUser(user));
@@ -45,4 +46,6 @@ export default async function handler(req, res) {
   }
 
   return res.status(422).json({ message: "Method not allowed" });
-}
+};
+
+export default withAuth(handler);

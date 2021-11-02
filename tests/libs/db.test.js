@@ -5,13 +5,15 @@ import { verify } from "../../utils/hash";
 
 const prisma = new PrismaClient();
 
-afterEach(async () => {
-  await prisma.user.deleteMany();
-  await prisma.website.deleteMany();
-  await prisma.event.deleteMany();
+beforeEach(async () => {
+  await prisma.$executeRawUnsafe(`TRUNCATE TABLE "users" RESTART IDENTITY`);
+  await prisma.$executeRawUnsafe(`TRUNCATE TABLE "websites" RESTART IDENTITY`);
+  await prisma.$executeRawUnsafe(
+    `TRUNCATE TABLE "events" RESTART IDENTITY CASCADE`
+  );
 });
 
-describe.skip("getAllUser", () => {
+describe("getAllUsers", () => {
   const data = {
     firstname: "Renato",
     lastname: "Pozzi",
@@ -28,13 +30,11 @@ describe.skip("getAllUser", () => {
     expect(users.length).toBe(1);
 
     users.forEach((user) => {
-      expect(user).toEqual({
+      expect(user).toMatchObject({
         id: expect.any(Number),
         firstname: expect.any(String),
         lastname: expect.any(String),
         email: expect.any(String),
-        created_at: expect.any(String),
-        updated_at: expect.any(String),
       });
     });
   });
