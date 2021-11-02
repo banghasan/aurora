@@ -1,6 +1,7 @@
 import Joi from "joi";
-import db from "../../../lib/db";
-import { formatUser } from "../../../utils/responses";
+import db from "../../lib/db";
+import { formatUser } from "../../utils/responses";
+import prisma from "../../lib/dbInstance";
 
 const schema = Joi.object({
   firstname: Joi.string().required(),
@@ -19,15 +20,31 @@ const schema = Joi.object({
   confirmPassword: Joi.string().valid(Joi.ref("password")).required(),
 });
 
+const checkSetupIsNeeded = async () => {
+  const count = await prisma.user.count();
+  return count < 1;
+};
+
 export default async function handler(req, res) {
   if (req.method === "GET") {
-    const data = await db.getAllUsers();
-    const users = data.map((user) => formatUser(user));
+    const needsSetup = await checkSetupIsNeeded();
 
-    return res.status(200).json(users);
+    if (needsSetup) {
+      return res.json({ message: "Setup not completed" });
+    } else {
+      return res.status(400).json({ message: "Setup already completed" });
+    }
   }
 
   if (req.method === "POST") {
+    const needsSetup = await checkSetupIsNeeded();
+
+    if (!needsSetup) {
+      return res.status(400).json({
+        message: "There is already a user in the database",
+      });
+    }
+
     let value;
 
     try {
