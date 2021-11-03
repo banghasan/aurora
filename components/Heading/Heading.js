@@ -1,5 +1,5 @@
 import { Prose } from "../UI/Prose";
-import { Title } from "./Title";
+import { Title } from "../UI/Title";
 
 export function Heading(props) {
   return (

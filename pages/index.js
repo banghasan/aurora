@@ -1,4 +1,4 @@
-import { Container } from "../components/Container";
+import { Container } from "../components/UI/Container";
 import { Heading } from "../components/Heading/Heading";
 import { WebsiteList } from "../components/Websites/WebsiteList";
 

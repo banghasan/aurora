@@ -1,5 +1,5 @@
 import { BarChart } from "../components/UI/BarChart";
-import { Container } from "../components/Container";
+import { Container } from "../components/UI/Container";
 import { Heading } from "../components/Heading/Heading";
 import { Card } from "../components/UI/Card";
 

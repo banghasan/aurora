@@ -1,5 +1,5 @@
 import { useRouter } from "next/dist/client/router";
-import { EmptyState } from "../EmptyState";
+import { EmptyState } from "../UI/EmptyState";
 import { UserCard } from "./UserCard";
 
 export function UserList(props) {

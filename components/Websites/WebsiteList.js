@@ -1,6 +1,6 @@
 import { useRouter } from "next/dist/client/router";
 import { WebsiteCard } from "./WebsiteCard";
-import { EmptyState } from "../EmptyState";
+import { EmptyState } from "../UI/EmptyState";
 
 export function WebsiteList(props) {
   const router = useRouter();
