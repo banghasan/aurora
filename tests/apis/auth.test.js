@@ -75,6 +75,24 @@ describe("POST /auth/login", () => {
       message: "Invalid credentials",
     });
   });
+
+  it("should fail if the email is incorrect", async () => {
+    const { req, res } = createMocks({
+      method: "POST",
+      body: {
+        email: "invalid",
+        password: data.password,
+      },
+    });
+
+    await loginHandler(req, res);
+
+    expect(res._getStatusCode()).toBe(401);
+    expect(res._getHeaders()["set-cookie"]).toBeUndefined();
+    expect(res._getJSONData()).toEqual({
+      message: "Invalid credentials",
+    });
+  });
 });
 
 describe("POST /auth/logout", () => {
