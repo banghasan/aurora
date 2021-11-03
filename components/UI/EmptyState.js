@@ -1,4 +1,4 @@
-import { Database } from "./Icons/Database";
+import { Database } from "../Icons/Database";
 
 export function EmptyState(props) {
   return (
