@@ -38,7 +38,7 @@ model Event {
   referrer   String?
   duration   Float      @default(0.0)
   device     String
-  locale     String
+  locale     String?
   website_id String
   created_at DateTime   @default(now())
   updated_at DateTime   @updatedAt

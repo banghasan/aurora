@@ -20,3 +20,19 @@ export const formatWebsite = (website) => {
     updated_at: website.updated_at,
   };
 };
+
+export const formatEvent = (event) => {
+  return {
+    id: event.id,
+    type: event.type,
+    element: event.element,
+    referrer: event.referrer,
+    duration: event.duration,
+    device: event.device,
+    locale: event.locale,
+    website_id: event.website_id,
+    created_at: event.created_at,
+    updated_at: event.created_at,
+    metadata: event.metadata,
+  };
+};
