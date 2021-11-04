@@ -1,5 +1,5 @@
 import { createMocks } from "node-mocks-http";
-import { serialize } from "cookie";
+import { parse, serialize } from "cookie";
 import { AUTH_COOKIE } from "./constants";
 import handler from "../pages/api/auth/login";
 
@@ -19,12 +19,15 @@ export class AuthTest {
     await handler(req, res);
 
     const { accessToken, user } = res._getJSONData();
-    const cookie = serialize(AUTH_COOKIE, accessToken, {
+    const serializedCookie = serialize(AUTH_COOKIE, accessToken, {
       path: "/",
       httpOnly: true,
       sameSite: true,
       maxAge: 60,
     });
+
+    // Workaround for pass cookie as an object.
+    const cookie = parse(serializedCookie);
 
     return { ...user, cookie };
   }

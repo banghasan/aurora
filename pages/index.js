@@ -1,6 +1,7 @@
 import { Container } from "../components/UI/Container";
 import { Heading } from "../components/Heading/Heading";
 import { WebsiteList } from "../components/Websites/WebsiteList";
+import { useAuth } from "../lib/hooks/useAuth";
 
 const websites = [
   {
@@ -48,6 +49,10 @@ const websites = [
 ];
 
 export default function Home(props) {
+  const { user } = useAuth();
+
+  console.log("user ", user);
+
   return (
     <Container>
       <Heading title="Your Websites">
