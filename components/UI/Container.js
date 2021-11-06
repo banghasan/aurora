@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { Navbar } from "../Navbar/Navbar";
 
 export function Container(props) {
@@ -8,6 +9,8 @@ export function Container(props) {
       <div className="max-w-7xl mx-auto">
         <main className="px-6 md:px-0 py-14">{props.children}</main>
       </div>
+
+      <Toaster />
     </div>
   );
 }
