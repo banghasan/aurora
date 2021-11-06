@@ -13,8 +13,8 @@ export function WebsiteForm(props) {
   });
 
   const options = [
-    { label: "Nope, I Want to Keep it Private!", value: "0" },
-    { label: "Yes, Make it Public!", value: "1" },
+    { label: "Nope, I Want to Keep it Private!", value: "false" },
+    { label: "Yes, Make it Public!", value: "true" },
   ];
 
   return (
