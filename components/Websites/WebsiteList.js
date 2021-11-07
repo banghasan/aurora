@@ -17,12 +17,7 @@ export function WebsiteList(props) {
     return (
       <div className="grid grid-cols-3 gap-4">
         {props.websites.map((website) => (
-          <WebsiteCard
-            key={website.id}
-            name={website.name}
-            url={website.url}
-            is_public={website.is_public}
-          />
+          <WebsiteCard key={website.id} {...website} />
         ))}
 
         <EmptyState text="Create a new Website!" onClick={handleClick} />

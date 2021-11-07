@@ -19,7 +19,12 @@ export function WebsiteCard(props) {
         </h4>
       </div>
       <div className="flex space-x-4">
-        <Button variant="inverted" label="Edit" />
+        <Button
+          variant="outline"
+          role="link"
+          href={`/websites/${props.id}/edit`}
+          label="Edit"
+        />
         <Button label="Dashboard" />
       </div>
     </Card>
