@@ -22,7 +22,7 @@ const schema = Joi.object({
 });
 
 const handler = async (req, res) => {
-  const uid = req.params.id;
+  const uid = Number(req.query.id);
   const data = await db.getUserById(uid);
 
   if (!data) {
