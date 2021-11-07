@@ -1,18 +1,26 @@
-import { Container } from "../../../components/Container";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { useUser } from "../../../lib/hooks/useUser";
+import { useToast } from "../../../lib/hooks/useToast";
+import { Container } from "../../../components/UI/Container";
 import { Heading } from "../../../components/Heading/Heading";
 import { UserForm } from "../../../components/Users/UserForm";
 
-const user = {
-  id: 1,
-  firstname: "John",
-  lastname: "Doe",
-  email: "ciccio@example.com",
-};
-
 export default function Edit(props) {
-  const handleSubmit = (data) => {
-    console.log(data);
+  const router = useRouter();
+  const { showSuccess, showError } = useToast();
+  const { user, isLoading, error } = useUser(router.query.id);
+
+  const handleSubmit = async (data) => {
+    try {
+      await axios.put(`/api/users/${router.query.id}`, data);
+      showSuccess("User Updated!");
+    } catch (err) {
+      showError("Error updating user");
+    }
   };
+
+  const isLoaded = !isLoading && !error;
 
   return (
     <Container>
@@ -22,7 +30,10 @@ export default function Edit(props) {
         nibh mattis, in aliquam dui condimentum.
       </Heading>
 
-      <UserForm isNew={false} defaultValues={user} onSubmit={handleSubmit} />
+      {!isLoaded && <p>Loading...</p>}
+      {isLoaded && (
+        <UserForm isNew={false} defaultValues={user} onSubmit={handleSubmit} />
+      )}
     </Container>
   );
 }

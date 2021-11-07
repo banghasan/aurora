@@ -1,17 +1,12 @@
+import { useUsers } from "../../lib/hooks/useUsers";
 import { Container } from "../../components/UI/Container";
 import { UserList } from "../../components/Users/UserList";
 import { Heading } from "../../components/Heading/Heading";
 
-const users = [
-  {
-    id: 1,
-    name: "John Doe",
-    email: "ciccio@example.com",
-    role: "admin",
-  },
-];
+export default function Users() {
+  const { users, isLoading, isError } = useUsers();
+  const isLoaded = !isLoading && !isError;
 
-export default function Users(props) {
   return (
     <Container>
       <Heading title="Users List">
@@ -20,7 +15,8 @@ export default function Users(props) {
         nibh mattis, in aliquam dui condimentum.
       </Heading>
 
-      <UserList users={users} />
+      {!isLoaded && <p>Loading...</p>}
+      {isLoaded && <UserList users={users} />}
     </Container>
   );
 }

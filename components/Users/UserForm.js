@@ -6,8 +6,10 @@ import { SubTitle } from "../UI/SubTitle";
 import { Prose } from "../UI/Prose";
 
 export function UserForm(props) {
+  const { firstname, lastname, email } = props.defaultValues;
+
   const { register, handleSubmit, formState } = useForm({
-    defaultValues: props.defaultValues,
+    defaultValues: { firstname, lastname, email },
   });
 
   return (
@@ -18,7 +20,8 @@ export function UserForm(props) {
       <Input label="First Name" {...register("firstname")} />
       <Input label="Last Name" {...register("lastname")} />
       <Input label="Email Address" {...register("email")} />
-      <Select label="Role" {...register("role")} options={[]} />
+      {/* TODO: Implement role logic with tests */}
+      {/* <Select label="Role" {...register("role")} options={[]} /> */}
 
       <div className="space-y-3 pt-10">
         <SubTitle>Set Password</SubTitle>
@@ -33,7 +36,7 @@ export function UserForm(props) {
         <Input
           label="Confirm Password"
           type="password"
-          {...register("password_confirmation")}
+          {...register("confirmPassword")}
         />
       </div>
 
@@ -48,3 +51,7 @@ export function UserForm(props) {
     </form>
   );
 }
+
+UserForm.defaultProps = {
+  defaultValues: {},
+};

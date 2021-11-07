@@ -10,14 +10,14 @@ export function UserList(props) {
   };
 
   if (props.users.length < 1) {
-    return <EmptyState text="Create a new Website!" onClick={handleClick} />;
+    return <EmptyState text="Create a new User!" onClick={handleClick} />;
   }
 
   if (props.users.length > 0) {
     return (
       <div className="space-y-3">
         {props.users.map((user) => (
-          <UserCard key={user.id} name={user.name} role={user.role} />
+          <UserCard key={user.id} {...user} />
         ))}
 
         <EmptyState text="Create New User!" onClick={handleClick} />

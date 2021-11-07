@@ -1,10 +1,23 @@
+import axios from "axios";
 import { Container } from "../../components/UI/Container";
 import { Heading } from "../../components/Heading/Heading";
 import { UserForm } from "../../components/Users/UserForm";
+import { useRouter } from "next/router";
+import { useToast } from "../../lib/hooks/useToast";
 
-export default function Create(props) {
-  const handleSubmit = (data) => {
-    console.log(data);
+export default function Create() {
+  const router = useRouter();
+  const { showSuccess, showError } = useToast();
+
+  const handleSubmit = async (data) => {
+    try {
+      const res = await axios.post("/api/users", data);
+      showSuccess("User created successfully");
+      router.push(`/users/${res.data.id}/edit`);
+    } catch (error) {
+      console.log(error);
+      showError("Error creating user");
+    }
   };
 
   return (
