@@ -8,8 +8,10 @@ import { Textarea } from "../UI/Textarea";
 import { Fragment } from "react";
 
 export function WebsiteForm(props) {
+  const { name, description, url, is_public } = props.defaultValues;
+
   const { register, handleSubmit, formState } = useForm({
-    defaultValues: props.defaultValues,
+    defaultValues: { name, description, url, is_public },
   });
 
   const options = [
