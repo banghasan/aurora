@@ -13,7 +13,7 @@ export function UserCard(props) {
         </div>
 
         <div className="flex-1 min-w-0">
-          <Link href="/users/[id]" as={`/users/${props.id}`}>
+          <Link href="/users/[id]/edit" as={`/users/${props.id}/edit`}>
             <a className="focus:outline-none">
               <span className="absolute inset-0" aria-hidden="true"></span>
               <p className="text-sm font-medium text-gray-900">
