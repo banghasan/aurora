@@ -1,16 +1,22 @@
-import { Container } from "../../components/Container";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { useToast } from "../../lib/hooks/useToast";
+import { Container } from "../../components/UI/Container";
 import { Heading } from "../../components/Heading/Heading";
 import { WebsiteForm } from "../../components/Websites/WebsiteForm";
 
-export default function Create(props) {
-  const handleSubmit = async (data) => {
-    console.log("Parto");
-    await simulateServerResponse();
-    console.log(data);
-  };
+export default function Create() {
+  const router = useRouter();
+  const { showSuccess, showError } = useToast();
 
-  const simulateServerResponse = () => {
-    return new Promise((resolve) => setTimeout(resolve, 5000));
+  const handleSubmit = async (data) => {
+    try {
+      const res = await axios.post("/api/websites", data);
+      showSuccess("Website created successfully");
+      router.push(`/websites/${res.data.id}/edit`);
+    } catch (error) {
+      showError("Error creating website");
+    }
   };
 
   return (
