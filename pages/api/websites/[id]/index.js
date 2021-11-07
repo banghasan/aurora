@@ -7,11 +7,13 @@ import { formatWebsite } from "../../../../utils/responses";
 const schema = Joi.object({
   name: Joi.string().required(),
   url: Joi.string().required(),
+  description: Joi.string().allow(""), // TODO: Add tests for this
   is_public: Joi.boolean().required(),
 });
 
+// TODO: CHANGE PARAMS TO QUERY
 const handler = async (req, res) => {
-  const data = await db.getUserWebsite(req.user.id, req.params.id);
+  const data = await db.getUserWebsite(req.user.id, req.query.id);
 
   if (!data) {
     return res.status(404).json({ message: "Website not found" });
@@ -29,7 +31,7 @@ const handler = async (req, res) => {
     }
 
     const { name, url, is_public } = value;
-    const website = await db.updateWebsite(req.params.id, {
+    const website = await db.updateWebsite(req.query.id, {
       name,
       url,
       is_public,

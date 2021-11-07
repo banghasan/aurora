@@ -6,7 +6,7 @@ import { formatWebsite } from "../../../utils/responses";
 const schema = Joi.object({
   name: Joi.string().required(),
   url: Joi.string().required(),
-  description: Joi.string(),
+  description: Joi.string().allow(""), // TODO: Add tests for this
   is_public: Joi.boolean().required(),
 });
 
