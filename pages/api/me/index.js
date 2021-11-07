@@ -17,7 +17,7 @@ const schema = Joi.object({
         throw new Error("Email already taken");
       }
     }),
-  password: Joi.string().min(8), // TODO: add password validation
+  password: Joi.string().min(8).allow(""), // TODO: add password validation
   confirmPassword: Joi.string().valid(Joi.ref("password")),
 });
 
