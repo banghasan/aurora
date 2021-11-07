@@ -1,20 +1,20 @@
+import { useRouter } from "next/router";
+import { useAuth } from "../lib/hooks/useAuth";
+import { useToast } from "../lib/hooks/useToast";
+import { Card } from "../components/UI/Card";
 import { Aurora } from "../components/Icons/Aurora";
 import { SignInForm } from "../components/SignIn/SignInForm";
-import { Card } from "../components/UI/Card";
+import { Toaster } from "react-hot-toast";
 
 export default function SignIn() {
+  const router = useRouter();
+  const { signIn } = useAuth();
+  const { showError } = useToast();
+
   const handleSubmit = async (data) => {
-    console.log(data);
-    // TODO: change to signin
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    const json = await res.json();
-    console.log(json);
+    signIn(data)
+      .then(() => router.push("/"))
+      .catch(() => showError("Invalid email or password"));
   };
 
   return (
@@ -28,6 +28,8 @@ export default function SignIn() {
           &copy;2021 Aurora - Open Web Analytics.
         </p>
       </Card>
+
+      <Toaster />
     </div>
   );
 }
