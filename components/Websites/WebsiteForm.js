@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "../UI/Input";
 import { Button } from "../UI/Button";
@@ -5,7 +6,6 @@ import { Select } from "../UI/Select";
 import { SubTitle } from "../UI/SubTitle";
 import { Prose } from "../UI/Prose";
 import { Textarea } from "../UI/Textarea";
-import { Fragment } from "react";
 
 export function WebsiteForm(props) {
   const { name, description, url, is_public } = props.defaultValues;
@@ -18,6 +18,10 @@ export function WebsiteForm(props) {
     { label: "Nope, I Want to Keep it Private!", value: "false" },
     { label: "Yes, Make it Public!", value: "true" },
   ];
+
+  const currentUrl = location.protocol + "//" + location.host;
+  const sharedLink = `${currentUrl}/s/${props.defaultValues.id}`;
+  const generatedLink = `<script async defer src="${currentUrl}/aurora.js" aurora-id="${props.defaultValues.id}"></script>`;
 
   return (
     <form
@@ -47,7 +51,9 @@ export function WebsiteForm(props) {
         <Fragment>
           <div className="space-y-3 pt-10">
             <SubTitle>Link to Share</SubTitle>
-            <Prose>Inserire Qui</Prose>
+            <Prose>
+              <a href={sharedLink}>{sharedLink}</a>
+            </Prose>
           </div>
 
           <div className="space-y-3 pt-10">
@@ -58,7 +64,7 @@ export function WebsiteForm(props) {
           </div>
 
           <pre className="p-4 bg-gray-200 text-black dark:text-white">
-            TODO: Inserire SCRIPT
+            {generatedLink}
           </pre>
         </Fragment>
       )}
