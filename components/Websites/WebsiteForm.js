@@ -6,6 +6,7 @@ import { Select } from "../UI/Select";
 import { SubTitle } from "../UI/SubTitle";
 import { Prose } from "../UI/Prose";
 import { Textarea } from "../UI/Textarea";
+import { Hint } from "../UI/Hint";
 
 export function WebsiteForm(props) {
   const { name, description, url, is_public } = props.defaultValues;
@@ -30,7 +31,10 @@ export function WebsiteForm(props) {
     >
       <Input label="Name *" {...register("name")} />
       <Input label="URL *" name="url" {...register("url")} />
-      <Textarea label="Description" {...register("description")} />
+      <div className="space-y-2">
+        <Textarea label="Description" {...register("description")} />
+        <Hint>This description will appear on the website Dashboard.</Hint>
+      </div>
 
       <div className="space-y-3 pt-10">
         <SubTitle>Share Statistics</SubTitle>
