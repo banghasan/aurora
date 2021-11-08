@@ -29,10 +29,11 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     const needsSetup = await checkSetupIsNeeded();
 
+    // TODO: i need to change tests to support all 200 ok
     if (needsSetup) {
-      return res.json({ message: "Setup not completed" });
+      return res.json({ needsSetup, message: "Setup not completed" });
     } else {
-      return res.status(400).json({ message: "Setup already completed" });
+      return res.json({ needsSetup, message: "Setup already completed" });
     }
   }
 
