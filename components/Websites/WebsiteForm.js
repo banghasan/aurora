@@ -20,7 +20,8 @@ export function WebsiteForm(props) {
     { label: "Yes, Make it Public!", value: "true" },
   ];
 
-  const currentUrl = location.protocol + "//" + location.host;
+  // TODO: Building this page is a problem for Next.js. Maybe move it to useEffect?
+  const currentUrl = window.location.protocol + "//" + window.location.host;
   const sharedLink = `${currentUrl}/s/${props.defaultValues.id}`;
   const generatedLink = `<script async defer src="${currentUrl}/aurora.js" aurora-id="${props.defaultValues.id}"></script>`;
 
