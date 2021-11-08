@@ -14,6 +14,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:tracker": "webpack --config tracker.config.js --mode production",
     "start": "next start",
     "test": "jest --runInBand --verbose"
   },
@@ -49,6 +50,8 @@
     "jest": "^27.3.1",
     "postcss": "^8.2.14",
     "prisma": "^3.3.0",
-    "tailwindcss": "^2.0.4"
+    "tailwindcss": "^2.0.4",
+    "webpack": "^5.62.1",
+    "webpack-cli": "^4.9.1"
   }
 }
