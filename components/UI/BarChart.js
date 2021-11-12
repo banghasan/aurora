@@ -1,194 +1,145 @@
-// import React, { PureComponent } from "react";
-// import {
-//   BarChart as ReBarChart,
-//   Bar,
-//   Cell,
-//   XAxis,
-//   YAxis,
-//   CartesianGrid,
-//   Tooltip,
-//   Legend,
-//   ResponsiveContainer,
-// } from "recharts";
-
-// const data = [
-//   { name: "12AM", visits: 300, unique: 40 },
-//   { name: "1AM", visits: 400, unique: 80 },
-//   { name: "2AM", visits: 310, unique: 40 },
-//   { name: "3AM", visits: 600, unique: 230 },
-//   { name: "4AM", visits: 300, unique: 40 },
-//   { name: "5AM", visits: 300, unique: 40 },
-//   { name: "6AM", visits: 300, unique: 40 },
-//   { name: "7AM", visits: 300, unique: 40 },
-//   { name: "8AM", visits: 300, unique: 40 },
-//   { name: "9AM", visits: 300, unique: 40 },
-//   { name: "10AM", visits: 300, unique: 40 },
-//   { name: "11AM", visits: 300, unique: 40 },
-//   { name: "12PM", visits: 300, unique: 40 },
-//   { name: "1PM", visits: 300, unique: 40 },
-//   { name: "2PM", visits: 300, unique: 40 },
-//   { name: "3PM", visits: 300, unique: 40 },
-//   { name: "4PM", visits: 300, unique: 40 },
-//   { name: "5PM", visits: 300, unique: 40 },
-//   { name: "6PM", visits: 300, unique: 40 },
-//   { name: "7PM", visits: 300, unique: 40 },
-//   { name: "8PM", visits: 300, unique: 40 },
-//   { name: "9PM", visits: 300, unique: 40 },
-//   { name: "10PM", visits: 300, unique: 40 },
-//   { name: "11PM", visits: 300, unique: 40 },
-// ];
-
-// export class BarChart extends PureComponent {
-//   static demoUrl = "https://codesandbox.io/s/stacked-bar-chart-s47i2";
-
-//   render() {
-//     return (
-//       <ResponsiveContainer width="100%" height="100%">
-//         <ReBarChart
-//           height={300}
-//           data={data}
-//           margin={{
-//             top: 20,
-//             right: 30,
-//             left: 20,
-//             bottom: 5,
-//           }}
-//         >
-//           <CartesianGrid strokeDasharray="3 3" />
-//           <XAxis dataKey="name" />
-//           <YAxis />
-//           <Tooltip />
-//           <Legend />
-//           <Bar dataKey="visits" stackId="a" fill="#111827" />
-//           <Bar dataKey="unique" stackId="a" fill="#6B7280" />
-//         </ReBarChart>
-//       </ResponsiveContainer>
-//     );
-//   }
-// }
-
 import { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
-const data = [
-  { name: "12AM", visits: 300, unique: 40 },
-  { name: "1AM", visits: 400, unique: 80 },
-  { name: "2AM", visits: 310, unique: 40 },
-  { name: "3AM", visits: 600, unique: 230 },
-  { name: "4AM", visits: 300, unique: 40 },
-  { name: "5AM", visits: 300, unique: 40 },
-  { name: "6AM", visits: 300, unique: 40 },
-  { name: "7AM", visits: 300, unique: 40 },
-  { name: "8AM", visits: 300, unique: 40 },
-  { name: "9AM", visits: 300, unique: 40 },
-  { name: "10AM", visits: 300, unique: 40 },
-  { name: "11AM", visits: 300, unique: 40 },
-  { name: "12PM", visits: 300, unique: 40 },
-  { name: "1PM", visits: 300, unique: 40 },
-  { name: "2PM", visits: 300, unique: 40 },
-  { name: "3PM", visits: 300, unique: 40 },
-  { name: "4PM", visits: 300, unique: 40 },
-  { name: "5PM", visits: 300, unique: 40 },
-  { name: "6PM", visits: 300, unique: 40 },
-  { name: "7PM", visits: 300, unique: 40 },
-  { name: "8PM", visits: 300, unique: 40 },
-  { name: "9PM", visits: 300, unique: 40 },
-  { name: "10PM", visits: 300, unique: 40 },
-  { name: "11PM", visits: 300, unique: 40 },
+const dataset = [
+  {
+    views: 237,
+  },
+  {
+    views: 613,
+  },
+  {
+    views: 255,
+  },
+  {
+    views: 996,
+  },
+  {
+    views: 19,
+  },
+  {
+    views: 934,
+  },
+  {
+    views: 836,
+  },
+  {
+    views: 192,
+  },
+  {
+    views: 937,
+  },
+  {
+    views: 249,
+  },
+  {
+    views: 990,
+  },
+  {
+    views: 138,
+  },
+  {
+    views: 897,
+  },
+  {
+    views: 72,
+  },
+  {
+    views: 748,
+  },
+  {
+    views: 252,
+  },
+  {
+    views: 767,
+  },
+  {
+    views: 292,
+  },
+  {
+    views: 12,
+  },
+  {
+    views: 363,
+  },
+  {
+    views: 736,
+  },
+  {
+    views: 224,
+  },
+  {
+    views: 766,
+  },
+  {
+    views: 64,
+  },
 ];
 
-export const useD3 = (renderChartFn, dependencies) => {
+export function BarChart() {
   const ref = useRef();
 
   useEffect(() => {
-    renderChartFn(d3.select(ref.current));
-    return () => {};
-  }, dependencies);
-  return ref;
-};
+    const h = 400;
+    const w = ref.current.offsetWidth;
 
-export function BarChart() {
-  const ref = useD3(
-    (svg) => {
-      const height = 500;
-      const width = 500;
-      // const margin = { top: 20, right: 30, bottom: 30, left: 40 };
-      const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+    //create ordinal scale
+    var xScale = d3
+      .scaleBand()
+      .domain(d3.range(dataset.length))
+      .rangeRound([0, w])
+      .paddingInner(0.05);
 
-      const x = d3
-        .scaleBand()
-        .domain(data.map((d) => d.name))
-        .rangeRound([margin.left, width - margin.right])
-        .padding(0.1);
+    var yScale = d3
+      .scaleLinear()
+      .domain([0, d3.max(dataset.map((d) => d.views))]) // Inserito
+      .range([0, h]);
 
-      const y1 = d3
-        .scaleLinear()
-        .domain([0, d3.max(data, (d) => d.visits)])
-        .rangeRound([height - margin.bottom, margin.top]);
+    //Create SVG element
+    var svg = d3
+      .select(ref.current)
+      .append("svg")
+      .attr("width", w)
+      .attr("height", h);
 
-      const xAxis = (g) =>
-        g.attr("transform", `translate(0,${height - margin.bottom})`).call(
-          d3
-            .axisBottom(x)
-            .tickValues(
-              d3
-                .ticks(...d3.extent(x.domain()), width / 40)
-                .filter((v) => x(v) !== undefined)
-            )
-            .tickSizeOuter(0)
-        );
+    //build bars
+    svg
+      .selectAll("rect")
+      .data(dataset)
+      .enter()
+      .append("rect")
+      .attr("x", function (d, i) {
+        return xScale(i);
+      })
+      .attr("y", function (d) {
+        return h - yScale(d.views); // Inserito
+      })
+      .attr("width", xScale.bandwidth())
+      .attr("height", function (d) {
+        return yScale(d.views); // Inserito
+      })
+      .attr("fill", "teal");
 
-      const y1Axis = (g) =>
-        g
-          .attr("transform", `translate(${margin.left},0)`)
-          .style("color", "steelblue")
-          .call(d3.axisLeft(y1).ticks(null, "s"))
-          .call((g) => g.select(".domain").remove())
-          .call((g) =>
-            g
-              .append("text")
-              .attr("x", -margin.left)
-              .attr("y", 10)
-              .attr("fill", "currentColor")
-              .attr("text-anchor", "start")
-              .text(data.y1)
-          );
+    //text labels on bars
+    svg
+      .selectAll("text")
+      .data(dataset)
+      .enter()
+      .append("text")
+      .text(function (d) {
+        return d.views; // Inserito
+      })
+      .attr("x", function (d, i) {
+        return xScale(i) + xScale.bandwidth() / 2;
+      })
+      .attr("y", function (d) {
+        return h - yScale(d.views) + 14; // Inserito
+      })
+      .attr("font-family", "sans-serif")
+      .attr("font-size", "11px")
+      .attr("fill", "white")
+      .attr("text-anchor", "middle");
+  }, []);
 
-      svg.select(".x-axis").call(xAxis);
-      svg.select(".y-axis").call(y1Axis);
-
-      svg
-        .select(".plot-area")
-        .attr("fill", "steelblue")
-        .selectAll(".bar")
-        .data(data)
-        .join("rect")
-        .attr("class", "bar")
-        .attr("x", (d) => {
-          console.log("d", d, x(d.name));
-
-          return x(d.name);
-        })
-        .attr("width", x.bandwidth())
-        .attr("y", (d) => y1(d.visits))
-        .attr("height", (d) => y1(0) - y1(d.visits));
-    },
-    [data.length]
-  );
-
-  return (
-    <svg
-      ref={ref}
-      style={{
-        height: 500,
-        width: "100%",
-        marginRight: "0px",
-        marginLeft: "0px",
-      }}
-    >
-      <g className="plot-area" />
-      <g className="x-axis" />
-      <g className="y-axis" />
-    </svg>
-  );
+  return <div className="w-full" ref={ref}></div>;
 }
