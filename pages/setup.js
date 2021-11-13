@@ -77,7 +77,7 @@ export default function Setup() {
           to continue. You will be able to change your information later.
         </Prose>
       </div>
-      <div class="flex items-center w-full max-w-xl">
+      <div className="flex items-center w-full max-w-xl">
         <Card className="bg-white shadow-md p-8">
           <SetupForm onSubmit={handleSubmit} />
 
