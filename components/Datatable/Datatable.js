@@ -15,12 +15,12 @@ export function Datatable(props) {
 
   return (
     <Card className="p-6">
-      <div class="space-y-5">
-        <h3 class="font-bold tracking-tighter text-3xl text-gray-900">
+      <div className="space-y-5">
+        <h3 className="font-bold tracking-tighter text-3xl text-gray-900">
           {props.title}
         </h3>
 
-        <dl class="space-y-1">
+        <dl className="space-y-1">
           <Thead />
           {mappedRows(props.rows)}
         </dl>
