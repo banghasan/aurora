@@ -11,12 +11,12 @@ export const Select = forwardRef((props, ref) => {
   });
 
   return (
-    <div>
+    <div className="w-full">
       <label htmlFor={id} className="block font-medium text-gray-700">
         {props.label}
       </label>
 
-      <div className="mt-1">
+      <div className={props.label && "mt-1"}>
         <select
           ref={ref}
           id={id}
