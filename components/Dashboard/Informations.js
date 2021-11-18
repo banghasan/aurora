@@ -7,6 +7,16 @@ import { SubTitle } from "../UI/SubTitle";
 import { Modal } from "../UI/Modal";
 import { useForm } from "react-hook-form";
 
+const {
+  subHours,
+  subDays,
+  subYears,
+  startOfToday,
+  startOfWeek,
+  startOfMonth,
+  startOfYear,
+} = require("date-fns");
+
 export function Informations(props) {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,11 +35,98 @@ export function Informations(props) {
     { label: "Page", value: "page" },
   ];
 
+  // TODO: Pls god fix this shit (indentation)
+  const getTimestamps = (filter) => {
+    switch (filter) {
+      case "LAST_24_HOURS":
+        return {
+          start: new Date(),
+          end: subHours(new Date(), 24),
+          unit: "hour",
+        };
+      case "LAST_7_DAYS":
+        return { start: new Date(), end: subDays(new Date(), 7), unit: "day" };
+      case "LAST_30_DAYS":
+        return { start: new Date(), end: subDays(new Date(), 30), unit: "day" };
+      case "LAST_90_DAYS":
+        return { start: new Date(), end: subDays(new Date(), 90), unit: "day" };
+      case "LAST_YEAR":
+        return {
+          start: new Date(),
+          end: subYears(new Date(), 1),
+          unit: "month",
+        };
+      case "TODAY":
+        return {
+          start: startOfToday(new Date()),
+          end: new Date(),
+          unit: "hour",
+        };
+      case "THIS_WEEK":
+        return { start: startOfWeek(new Date()), end: new Date(), unit: "day" };
+      case "THIS_MONTH":
+        return {
+          start: startOfMonth(new Date()),
+          end: new Date(),
+          unit: "day",
+        };
+      case "THIS_YEAR":
+        return {
+          start: startOfYear(new Date()),
+          end: new Date(),
+          unit: "month",
+        };
+      default:
+        return { start: new Date(), end: subHours(new Date(), 24) };
+    }
+  };
+
+  // TODO: Cool approach to handle the filters, but consider to do it using switch
+  // const MULTIPLIERS = {
+  //   HOURS: 1,
+  //   DAYS: 24,
+  // };
+
+  // const getStartDate = (filter) => {
+  //   const matches = filter.match(/([A-Z]*)_([\d+]*)_([A-Z]*)+/);
+  //   const [, , number, multiplier] = matches;
+
+  //   const startDate = new Date();
+  //   startDate.setHours(startDate.getHours() - MULTIPLIERS[multiplier] * number);
+  //   return startDate;
+  // };
+
+  // const getTimestamps = (filter) => {
+  //   const endDate = new Date();
+  //   const startDate = getStartDate(filter);
+
+  //   return {
+  //     start: startDate.getTime(),
+  //     end: endDate.getTime(),
+  //   };
+  // };
+
+  const handleRangeChange = (e) => {
+    const { value } = e.target;
+    // const { start, end } = getTimestamps(value);
+    const { start, end, unit } = getTimestamps(value);
+    handleApply({ start: start.getTime(), end: end.getTime(), unit });
+  };
+
+  const onSubmit = (data) => {
+    handleApply({ [data.filter]: data.value });
+  };
+
   const handleApply = (data) => {
     setActiveFilters((prev) => {
-      const next = { ...prev, ...{ [data.filter]: data.value } };
+      const next = { ...prev, ...data };
 
-      router.push({ pathname: "/dashboard", query: next }, undefined, {
+      // I don't wanna these params in the url
+      const { start, end, unit, ...whitelisted } = next;
+
+      // TODO: use router real path
+      // TODO2: is this really useful? Consider to disable that.
+      router.push({ pathname: "/dashboard", query: whitelisted }, undefined, {
         shallow: true,
       });
 
@@ -53,10 +150,19 @@ export function Informations(props) {
         </div>
         <div className="flex w-full">
           <Select
+            name="range"
             options={[
-              { value: "1", label: "Last 12 Months" },
-              { value: "2", label: "Last 6 Months" },
+              { value: "LAST_24_HOURS", label: "Last 24 Hours" },
+              { value: "LAST_7_DAYS", label: "Last 7 Days" },
+              { value: "LAST_30_DAYS", label: "Last 30 Days" },
+              { value: "LAST_90_DAYS", label: "Last 90 Days" },
+              { value: "LAST_YEAR", label: "Last Year" },
+              { value: "TODAY", label: "Today" },
+              { value: "THIS_WEEK", label: "This Week" },
+              { value: "THIS_MONTH", label: "This Month" },
+              { value: "THIS_YEAR", label: "This Year" },
             ]}
+            onChange={handleRangeChange}
           />
         </div>
       </div>
@@ -69,16 +175,16 @@ export function Informations(props) {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit(handleApply)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-5 mb-10 flex flex-col">
             <Select label="Filter" {...register("filter")} options={filters} />
             <Select
               label="Value"
-              {...register("value")}
               options={[
                 { value: "firefox", label: "Firefox" },
                 { value: "chrome", label: "Chrome" },
               ]}
+              {...register("value")}
             />
           </div>
           <div className="flex space-x-4">

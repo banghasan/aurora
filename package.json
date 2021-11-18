@@ -27,6 +27,7 @@
     "bcryptjs": "^2.4.3",
     "cookie": "^0.4.1",
     "d3": "^7.1.1",
+    "date-fns": "^2.25.0",
     "framer-motion": "^5.3.0",
     "jdenticon": "^3.1.1",
     "joi": "^17.4.2",

@@ -24,7 +24,10 @@ export function Filter(props) {
 }
 
 export function Filters(props) {
-  const filters = Object.keys(props.filters);
+  // I don't wanna these params be visible
+  const { start, end, unit, ...whitelisted } = props.filters;
+
+  const filters = Object.keys(whitelisted);
   const mappedFilters = filters.map((label, index) => {
     const value = props.filters[label];
     const color = COLORS[index % COLORS.length];
