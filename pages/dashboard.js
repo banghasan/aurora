@@ -11,9 +11,9 @@ import { BrowsersDatatable } from "../components/Dashboard/BrowsersDatatable";
 import { DevicesDatatable } from "../components/Dashboard/DevicesDatatable";
 import { CountriesDatatable } from "../components/Dashboard/CountriesDatatable";
 
-const MentionChart = dynamic(() => import("../components/UI/MentionChart"), {
+const ViewsChart = dynamic(() => import("../components/UI/ViewsChart"), {
   ssr: false,
-  loading: () => <div style={{ height: 350 }}></div>,
+  loading: () => <div style={{ height: 500 }}></div>,
 });
 
 const AreaChart = dynamic(() => import("../components/UI/AreaChart"), {
@@ -39,7 +39,7 @@ export default function Dashboard(props) {
 
         <div className="flex">
           <Card className="p-6">
-            <MentionChart />
+            <ViewsChart />
           </Card>
         </div>
 
