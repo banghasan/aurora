@@ -23,7 +23,7 @@ export function WebsiteForm(props) {
   // TODO: Building this page is a problem for Next.js. Maybe move it to useEffect?
   const currentUrl = window.location.protocol + "//" + window.location.host;
   const sharedLink = `${currentUrl}/s/${props.defaultValues.id}`;
-  const generatedLink = `<script async defer src="${currentUrl}/aurora.js" aurora-id="${props.defaultValues.id}"></script>`;
+  const generatedLink = `<script async defer src="${currentUrl}/t/aurora.js" aurora-id="${props.defaultValues.id}"></script>`;
 
   return (
     <form
