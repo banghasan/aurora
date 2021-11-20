@@ -49,7 +49,7 @@ const getData = () => {
   }
 
   if (useAurora.lastVisitAt <= +lastQuarter) {
-    data.isNewSession = true;
+    useAurora.isNewSession = true;
   }
 
   return useAurora;
@@ -82,9 +82,9 @@ const sum = (args = []) => args.reduce((acc, el) => acc + el, 0);
 
   const analyticsUrl = script
     .getAttribute("src")
-    .replace("/public/aurora.js", "/v2/collect");
+    .replace("/t/aurora.js", "/api/collect");
 
-  const seed = script.getAttribute("aurora-id");
+  const wid = script.getAttribute("aurora-id");
 
   // Tracking
   const track = async (path) => {
@@ -100,7 +100,7 @@ const sum = (args = []) => args.reduce((acc, el) => acc + el, 0);
           type: events.PAGE_VIEW,
           element: path,
           language: language,
-          seed: seed,
+          wid: wid,
           referrer: document.referrer,
           ...data,
         }),
@@ -133,7 +133,7 @@ const sum = (args = []) => args.reduce((acc, el) => acc + el, 0);
         const blob = new Blob(
           [
             JSON.stringify({
-              seed: seed,
+              wid: wid,
               duration: sum(timings),
             }),
           ],
