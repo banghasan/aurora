@@ -1,4 +1,5 @@
 import Joi from "joi";
+import NextCors from "nextjs-cors";
 import db from "../../../lib/db";
 import prisma from "../../../lib/dbInstance";
 import { parse } from "../../../utils/ua";
@@ -9,11 +10,25 @@ const schema = Joi.object({
   type: Joi.string(),
   element: Joi.string().required(),
   wid: Joi.string().required(),
-  locale: Joi.string(),
-  referrer: Joi.string(),
-});
+  language: Joi.string(),
+  referrer: Joi.string().allow(""),
+
+  // Currently not used
+  uid: Joi.string(),
+  isNewVisitor: Joi.boolean(),
+  isNewSession: Joi.boolean(),
+  lastVisitAt: Joi.number(),
+  expires: Joi.number(),
+}).unknown(true);
 
 const handler = async (req, res) => {
+  await NextCors(req, res, {
+    // Options
+    methods: ["PUT", "POST"],
+    origin: "*",
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
+
   if (req.method === "POST") {
     const { error, value } = schema.validate(req.body);
 
@@ -28,7 +43,7 @@ const handler = async (req, res) => {
     }
 
     const ua = parse(req.headers["user-agent"]);
-    const locale = tag(value.locale);
+    const locale = tag(value.language);
 
     const metadata = [];
     for (const index in ua.elements) {
