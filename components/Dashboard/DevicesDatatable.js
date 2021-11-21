@@ -1,25 +1,18 @@
+import { useMetadata } from "../../lib/hooks/useMetadata";
 import { Datatable } from "../Datatable/Datatable";
 
 export function DevicesDatatable(props) {
-  const devices = [
-    {
-      element: "Desktop",
-      views: "100",
-      unique: "12",
-    },
+  // TODO: wid
+  const { data, isLoading, isError } = useMetadata(
+    "ckw989nb00000e4glkkunxh8c",
+    "device"
+  );
 
-    {
-      element: "Tablet",
-      views: "40",
-      unique: "2",
-    },
+  const isLoaded = !isLoading && !isError;
 
-    {
-      element: "Mobile",
-      views: "30",
-      unique: "1",
-    },
-  ];
+  if (!isLoaded) {
+    return null;
+  }
 
-  return <Datatable title="Devices" rows={devices} />;
+  return <Datatable title="Devices" rows={data} />;
 }

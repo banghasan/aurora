@@ -1,43 +1,18 @@
+import { useMetadata } from "../../lib/hooks/useMetadata";
 import { Datatable } from "../Datatable/Datatable";
 
 export function CountriesDatatable(props) {
-  const countries = [
-    {
-      element: "United States",
-      views: "100",
-      unique: "12",
-    },
+  // TODO: wid
+  const { data, isLoading, isError } = useMetadata(
+    "ckw989nb00000e4glkkunxh8c",
+    "locale"
+  );
 
-    {
-      element: "United Kingdom",
-      views: "40",
-      unique: "2",
-    },
+  const isLoaded = !isLoading && !isError;
 
-    {
-      element: "Germany",
-      views: "30",
-      unique: "1",
-    },
+  if (!isLoaded) {
+    return null;
+  }
 
-    {
-      element: "France",
-      views: "20",
-      unique: "1",
-    },
-
-    {
-      element: "Italy",
-      views: "10",
-      unique: "1",
-    },
-
-    {
-      element: "Spain",
-      views: "10",
-      unique: "1",
-    },
-  ];
-
-  return <Datatable title="Countries" rows={countries} />;
+  return <Datatable title="Countries" rows={data} />;
 }
