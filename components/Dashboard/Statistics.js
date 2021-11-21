@@ -1,5 +1,6 @@
 import { animate } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { useStatistics } from "../../lib/hooks/useStatistics";
 import { formatter } from "../../utils/math";
 import { Card } from "../UI/Card";
 
@@ -37,14 +38,28 @@ export function Statistic(props) {
 }
 
 export function Statistics(props) {
+  // TODO: wid
+  const { data, isLoading, isError } = useStatistics(
+    "ckw989nb00000e4glkkunxh8c"
+  );
+
+  const isLoaded = !isLoading && !isError;
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+
+  const { visits, uniqueVisits, bounces, sessions, avgDuration } = data;
+
   return (
     <Card className="p-6">
       <div className="flex flex-col space-y-6">
-        <div className="flex space-x-14">
-          <Statistic label="Page Views" value={4000000000} />
-          <Statistic label="Unique Visits" value={200000000} />
-          <Statistic label="Bounces" value={354325} />
-          <Statistic label="Visit Duration" value={45} />
+        <div className="flex justify-between">
+          <Statistic label="Page Views" value={visits._count._all} />
+          <Statistic label="Unique Visits" value={uniqueVisits._count._all} />
+          <Statistic label="Bounces" value={bounces._count._all} />
+          <Statistic label="Sessions" value={sessions._count._all} />
+          <Statistic label="Visit Duration" value={avgDuration._avg.duration} />
           <Statistic label="Current Visitors" value={12} />
         </div>
       </div>
