@@ -25,7 +25,7 @@ export function Filter(props) {
 
 export function Filters(props) {
   // I don't wanna these params be visible
-  const { start, end, unit, ...whitelisted } = props.filters;
+  const { wid, start, end, unit, ...whitelisted } = props.filters;
 
   const filters = Object.keys(whitelisted);
   const mappedFilters = filters.map((label, index) => {

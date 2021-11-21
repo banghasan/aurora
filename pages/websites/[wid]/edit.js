@@ -9,11 +9,11 @@ import { WebsiteForm } from "../../../components/Websites/WebsiteForm";
 export default function Edit() {
   const router = useRouter();
   const { showSuccess, showError } = useToast();
-  const { website, isLoading, error } = useMeWebsite(router.query.id);
+  const { website, isLoading, error } = useMeWebsite(router.query.wid);
 
   const handleSubmit = async (data) => {
     try {
-      await axios.put(`/api/websites/${router.query.id}`, data);
+      await axios.put(`/api/websites/${router.query.wid}`, data);
       showSuccess("Website Updated!");
     } catch (err) {
       showError("Error updating website");

@@ -13,9 +13,11 @@ const handler = async (req, res) => {
   //if (!website.is_public )
 
   if (req.method === "GET") {
+    const filters = { start: req.query.start, end: req.query.end };
     const data = await db.getWebsiteViewsByMetadata(
       req.query.wid,
-      req.query.type
+      req.query.type,
+      filters
     );
 
     const unique = (el) => el.is_new_visitor;

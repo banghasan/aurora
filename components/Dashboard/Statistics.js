@@ -38,11 +38,7 @@ export function Statistic(props) {
 }
 
 export function Statistics(props) {
-  // TODO: wid
-  const { data, isLoading, isError } = useStatistics(
-    "ckw989nb00000e4glkkunxh8c"
-  );
-
+  const { data, isLoading, isError } = useStatistics(props.filters);
   const isLoaded = !isLoading && !isError;
 
   if (!isLoaded) {

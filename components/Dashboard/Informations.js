@@ -1,33 +1,15 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Filters } from "./Filters";
 import { Button } from "../UI/Button";
 import { Select } from "../UI/Select";
 import { SubTitle } from "../UI/SubTitle";
 import { Modal } from "../UI/Modal";
-import { useForm } from "react-hook-form";
-
-const {
-  subHours,
-  subDays,
-  subYears,
-  startOfToday,
-  startOfWeek,
-  startOfMonth,
-  startOfYear,
-} = require("date-fns");
+import { getTimestamps } from "../../utils/dates";
 
 export function Informations(props) {
-  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeFilters, setActiveFilters] = useState(router.query);
-  const { register, handleSubmit, formState } = useForm();
-
-  useEffect(() => {
-    if (router.isReady) {
-      setActiveFilters(router.query);
-    }
-  }, [router.isReady]);
+  const { register, handleSubmit } = useForm();
 
   const filters = [
     { label: "Country", value: "country" },
@@ -35,78 +17,19 @@ export function Informations(props) {
     { label: "Page", value: "page" },
   ];
 
-  // TODO: Pls god fix this shit (indentation)
-  const getTimestamps = (filter) => {
-    switch (filter) {
-      case "LAST_24_HOURS":
-        return {
-          start: new Date(),
-          end: subHours(new Date(), 24),
-          unit: "hour",
-        };
-      case "LAST_7_DAYS":
-        return { start: new Date(), end: subDays(new Date(), 7), unit: "day" };
-      case "LAST_30_DAYS":
-        return { start: new Date(), end: subDays(new Date(), 30), unit: "day" };
-      case "LAST_90_DAYS":
-        return { start: new Date(), end: subDays(new Date(), 90), unit: "day" };
-      case "LAST_YEAR":
-        return {
-          start: new Date(),
-          end: subYears(new Date(), 1),
-          unit: "month",
-        };
-      case "TODAY":
-        return {
-          start: startOfToday(new Date()),
-          end: new Date(),
-          unit: "hour",
-        };
-      case "THIS_WEEK":
-        return { start: startOfWeek(new Date()), end: new Date(), unit: "day" };
-      case "THIS_MONTH":
-        return {
-          start: startOfMonth(new Date()),
-          end: new Date(),
-          unit: "day",
-        };
-      case "THIS_YEAR":
-        return {
-          start: startOfYear(new Date()),
-          end: new Date(),
-          unit: "month",
-        };
-      default:
-        return { start: new Date(), end: subHours(new Date(), 24) };
-    }
-  };
-
   const handleRangeChange = (e) => {
     const { value } = e.target;
     const { start, end, unit } = getTimestamps(value);
-    handleApply({ start: start.getTime(), end: end.getTime(), unit });
+
+    props.onFilterChange({
+      start: start.getTime(),
+      end: end.getTime(),
+      unit,
+    });
   };
 
   const onSubmit = (data) => {
-    handleApply({ [data.filter]: data.value });
-  };
-
-  const handleApply = (data) => {
-    setActiveFilters((prev) => {
-      const next = { ...prev, ...data };
-
-      // I don't wanna these params in the url
-      const { start, end, unit, ...whitelisted } = next;
-
-      // TODO: use router real path
-      // TODO2: is this really useful? Consider to disable that.
-      router.push({ pathname: "/dashboard", query: whitelisted }, undefined, {
-        shallow: true,
-      });
-
-      return next;
-    });
-
+    props.onFilterChange({ [data.filter]: data.value });
     setIsModalOpen(false);
   };
 
@@ -116,7 +39,7 @@ export function Informations(props) {
         useaurora.app
       </h3>
 
-      <Filters filters={activeFilters} />
+      <Filters filters={props.activeFilters} />
 
       <div className="flex justify-end w-4/12 space-x-2">
         <div className="flex w-2/4">

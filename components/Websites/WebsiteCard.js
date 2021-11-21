@@ -25,7 +25,7 @@ export function WebsiteCard(props) {
           href={`/websites/${props.id}/edit`}
           label="Edit"
         />
-        <Button label="Dashboard" />
+        <Button label="Dashboard" role="link" href={`/websites/${props.id}`} />
       </div>
     </Card>
   );

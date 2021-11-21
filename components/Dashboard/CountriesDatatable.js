@@ -2,12 +2,7 @@ import { useMetadata } from "../../lib/hooks/useMetadata";
 import { Datatable } from "../Datatable/Datatable";
 
 export function CountriesDatatable(props) {
-  // TODO: wid
-  const { data, isLoading, isError } = useMetadata(
-    "ckw989nb00000e4glkkunxh8c",
-    "locale"
-  );
-
+  const { data, isLoading, isError } = useMetadata("locale", props.filters);
   const isLoaded = !isLoading && !isError;
 
   if (!isLoaded) {
