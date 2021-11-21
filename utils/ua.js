@@ -1,10 +1,13 @@
 const UAParser = require("ua-parser-js");
+import { ucFirst } from "./strings";
 
 export const parse = (ua) => {
   const elements = [];
   const parsed = new UAParser(ua).getResult();
 
-  const device = parsed.device.type ? parsed.device.type : "desktop";
+  /**
+   * Strict checking of data, in order to avoid partial informations.
+   */
 
   if (parsed.browser && parsed.browser.name && parsed.browser.version) {
     elements.push({
@@ -30,8 +33,17 @@ export const parse = (ua) => {
     });
   }
 
+  if (parsed.device) {
+    const device = parsed.device.type ? parsed.device.type : "desktop";
+
+    elements.push({
+      type: "device",
+      value: ucFirst(device),
+      version: null, // There is not any version.
+    });
+  }
+
   return {
-    device: device,
     elements: elements,
   };
 };
