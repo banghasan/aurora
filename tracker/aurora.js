@@ -31,6 +31,40 @@ const createUUID = () => {
   });
 };
 
+/** Funzionamento Tracker
+ *  Questa funzione è la funzione principale del tracker.
+ *
+ *  Al primo caricamento della pagina viene eseguita la funzione getData()
+ *  che restituisce un oggetto contenente le informazioni necessarie per il funzionamento del tracker.
+ *
+ *  Se l'utente è un nuovo visitatore, allora viene creato un nuovo ID univoco e viene salvato in locale.
+ *  Vengono impostati i parametri:
+ *  - uid: ID univoco dell'utente (Generato randomicamente)
+ *  - isNewVisitor: true se l'utente è un nuovo visitatore (default a true, alla prima visita)
+ *  - isNewSession: true se la visita è una nuova sessione (default a true, alla prima visita), la sessione dura 15 minuti
+ *  - lastPageViewID: ID dell'ultima pagina visitata (default a null, alla prima visita)
+ *  - lastVisitAt: timestamp dell'ultima visita (default a timestamp corrente)
+ *
+ *  Controllo Nuova Sessione:
+ *
+ *  Se l'utente non è un nuovo visitatore, viene verificato se la visita è all'interno della stessa sessione.
+ *  Se sono passati più di 15 minuti dall'ultima visita, viene creata una nuova sessione.
+ *
+ *  Controllo Nuovo Visitatore:
+ *
+ *  Il nuovo visitatore viene impostato a true alla creazione del payload, dopo il primo tracking viene impostato a false.
+ *  Rimane invariato fino alla scadenza del payload che avviene alla mezzanotte del giorno stesso.
+ *
+ *  Controllo Rimbalzo:
+ *
+ *  Alla prima visita, viene impostato is_a_bounce = true di default, essendo l'unica pagina.
+ *  Nel momento in cui vi è una seconda visita all'interno della stessa sessione, viene impostato is_a_bounce = false per il record
+ *  precedente, ed anche per i nuovi.
+ *  Nel caso in cui la sessione dei 15 minuti sia scaduta e ce ne sia una nuova, viene impostato is_a_bounce nuovamente a true.
+ *
+ *
+ */
+
 const getData = () => {
   const useAurora = JSON.parse(localStorage.getItem("_useAurora"));
   const lastQuarter = getLastQuarter();
@@ -48,6 +82,7 @@ const getData = () => {
     };
   }
 
+  // Se sono passati più di 15 minuti dall'ultima visita, viene creata una nuova sessione
   if (useAurora.lastVisitAt <= +lastQuarter) {
     useAurora.isNewSession = true;
   }
@@ -140,6 +175,7 @@ const sum = (args = []) => args.reduce((acc, el) => acc + el, 0);
           { type: "application/json; charset=UTF-8" }
         );
 
+        // TODO: lastPageViewID is not working
         navigator.sendBeacon(`${analyticsUrl}/${lastPageViewID}`, blob);
       } else {
         start = performance.now();
