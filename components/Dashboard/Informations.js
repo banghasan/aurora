@@ -81,34 +81,8 @@ export function Informations(props) {
     }
   };
 
-  // TODO: Cool approach to handle the filters, but consider to do it using switch
-  // const MULTIPLIERS = {
-  //   HOURS: 1,
-  //   DAYS: 24,
-  // };
-
-  // const getStartDate = (filter) => {
-  //   const matches = filter.match(/([A-Z]*)_([\d+]*)_([A-Z]*)+/);
-  //   const [, , number, multiplier] = matches;
-
-  //   const startDate = new Date();
-  //   startDate.setHours(startDate.getHours() - MULTIPLIERS[multiplier] * number);
-  //   return startDate;
-  // };
-
-  // const getTimestamps = (filter) => {
-  //   const endDate = new Date();
-  //   const startDate = getStartDate(filter);
-
-  //   return {
-  //     start: startDate.getTime(),
-  //     end: endDate.getTime(),
-  //   };
-  // };
-
   const handleRangeChange = (e) => {
     const { value } = e.target;
-    // const { start, end } = getTimestamps(value);
     const { start, end, unit } = getTimestamps(value);
     handleApply({ start: start.getTime(), end: end.getTime(), unit });
   };
