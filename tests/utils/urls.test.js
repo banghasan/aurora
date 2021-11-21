@@ -2,8 +2,8 @@ import { dropProtocol } from "../../utils/urls";
 
 describe("Testing Url dropProtocoling works", () => {
   it("testing with correct protocols", () => {
-    expect(dropProtocol("https://google.com")).toBe("google.com");
-    expect(dropProtocol("https://www.google.com")).toBe("google.com");
+    expect(dropProtocol("https://google.com/")).toBe("google.com");
+    expect(dropProtocol("https://www.google.com/")).toBe("google.com");
     expect(dropProtocol("www.google.com")).toBe("google.com");
     expect(dropProtocol("http://facebook.com")).toBe("facebook.com");
     expect(dropProtocol("http://www.facebook.com")).toBe("facebook.com");

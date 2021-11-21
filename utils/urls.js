@@ -1,2 +1,6 @@
-export const dropProtocol = (url) =>
-  url.replace(/(^\w+:|^)\/\//, "").replace("www.", "");
+export const dropProtocol = (url) => {
+  return url
+    .replace(/(^\w+:|^)\/\//, "")
+    .replace(/\/$/, "")
+    .replace("www.", "");
+};
