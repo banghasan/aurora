@@ -11,7 +11,7 @@ import { Container } from "../../../components/Container";
 import { client } from "../../../utils/api";
 import { Page } from "../../../components/Page";
 
-export async function getServerSideProps(context) {
+export async function getInitialProps(context) {
   const { seed } = context.query;
 
   return {
